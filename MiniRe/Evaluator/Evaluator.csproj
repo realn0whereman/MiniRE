@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>b2c67209-ab74-4451-a81a-0d5b2cbd2c3c</ProjectGuid>
+    <ProjectGuid>{A0DAFECD-376E-4034-85B0-840B212DDA4D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Evaluator</RootNamespace>
@@ -40,8 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="AST\AST.cs" />
+    <Compile Include="AST\Node.cs" />
+    <Compile Include="AST\Nodes\AsciiNode.cs" />
+    <Compile Include="AST\Nodes\AssignNode.cs" />
+    <Compile Include="AST\Nodes\LookupNode.cs" />
+    <Compile Include="AST\Nodes\OpNode.cs" />
+    <Compile Include="AST\Nodes\RegexNode.cs" />
+    <Compile Include="AST\Ops.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SymbolTable.cs" />
+    <Compile Include="Variables\StringMatch.cs" />
+    <Compile Include="Variables\StringMatchList.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

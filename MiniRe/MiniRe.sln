@@ -9,7 +9,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParserGenerator", "ParserGe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scanner", "Scanner\Scanner.csproj", "{FC44052D-4F04-4C32-807F-D3087740E280}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvaluatorTests", "EvaluatorTests\EvaluatorTests.csproj", "{4B404AE4-5FD6-4629-AD24-3AAD625AB8B8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B4A0C4CF-9ED1-4D23-8243-A5884B9FA0C4}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		MiniRe.vsmdi = MiniRe.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = MiniRe.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -59,6 +71,16 @@ Global
 		{FC44052D-4F04-4C32-807F-D3087740E280}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{FC44052D-4F04-4C32-807F-D3087740E280}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{FC44052D-4F04-4C32-807F-D3087740E280}.Release|x86.ActiveCfg = Release|Any CPU
+		{4B404AE4-5FD6-4629-AD24-3AAD625AB8B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B404AE4-5FD6-4629-AD24-3AAD625AB8B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B404AE4-5FD6-4629-AD24-3AAD625AB8B8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4B404AE4-5FD6-4629-AD24-3AAD625AB8B8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4B404AE4-5FD6-4629-AD24-3AAD625AB8B8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4B404AE4-5FD6-4629-AD24-3AAD625AB8B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B404AE4-5FD6-4629-AD24-3AAD625AB8B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B404AE4-5FD6-4629-AD24-3AAD625AB8B8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4B404AE4-5FD6-4629-AD24-3AAD625AB8B8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{4B404AE4-5FD6-4629-AD24-3AAD625AB8B8}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
