@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Evaluator.Variables
 {
-    class StringMatch
+    public class StringMatch
     {
         string text;
         string filename;
@@ -22,6 +22,14 @@ namespace Evaluator.Variables
             this.line = line;
             this.startIndex = startIndex;
             this.endIndex = endIndex;
+        }
+
+        public bool Matches(StringMatch match)
+        {
+            if (this.text == match.Text)
+                return true;
+            else
+                return false;
         }
 
         public string Text

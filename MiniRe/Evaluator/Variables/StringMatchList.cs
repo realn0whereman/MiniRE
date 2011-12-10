@@ -17,9 +17,31 @@ namespace Evaluator.Variables
             matches = new List<StringMatch>();
         }
 
+        public void AddMatch(StringMatch match)
+        {
+            matches.Add(new StringMatch(match.Text, match.Filename, match.Line, match.StartIndex, match.EndIndex));
+        }
         public void AddMatch(string text, string filename, int line, int startIndex, int endIndex)
         {
             matches.Add(new StringMatch(text, filename, line, startIndex, endIndex));
+        }
+
+        public StringMatchList Intersect(StringMatchList other)
+        {
+            StringMatchList list = new StringMatchList();
+
+            foreach (StringMatch s1 in matches)
+            {
+                foreach (StringMatch s2 in other.matches)
+                {
+                    if (s1.Matches(s2))
+                    {
+                        list.AddMatch(s1);
+                    }
+                }
+            }
+
+            return list;
         }
 
         /// <summary>

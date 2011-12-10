@@ -381,6 +381,42 @@ namespace GraphLibrary
             return current.Accepting;
         }
 
+        public List<String> FindTokens(String input)
+        {
+            List<String> tokens = new List<string>();
+            BaseVertex current = start;
+            String currentToken = "";
+
+            for (int x = 0; x < input.Length; x++)
+            {
+                char c = input[x];
+                bool foundNext = false;
+                foreach (Edge edge in current.Connections)
+                {
+                    if (edge.Condition == c.ToString())
+                    {
+                        foundNext = true;
+                        current = edge.Connection;
+                        currentToken += c;
+                        break;
+                    }
+                }
+                if (!foundNext)
+                {
+                    if (current.Accepting)
+                    {
+                        tokens.Add(currentToken);
+                        x--;
+                    }
+                    //invalid input
+                    currentToken = "";
+                    current = start;
+                }
+            }
+
+            return tokens;
+        }
+
 
         /// <summary>
         /// Switches the character classes to individual characters

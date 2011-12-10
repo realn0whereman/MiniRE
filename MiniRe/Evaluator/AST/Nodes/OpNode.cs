@@ -13,21 +13,34 @@ namespace Evaluator.AST.Nodes
     {
         Ops operation;
         List<Node> args;
+        List<String> inputs;
 
 
         public OpNode() { }
-        public OpNode(Ops operation, params Node[] args)
+        public OpNode(Ops operation, params Node[] nodeArgs)
         {
             this.operation = operation;
-            if (args.Length == 0)
+            if (nodeArgs.Length == 0)
             {
                 this.args = new List<Node>();
             }
             else
             {
-                this.args = args.ToList();
+                this.args = nodeArgs.ToList();
             }
 
+        }
+        public OpNode(Ops operation, params String[] inputs)
+        {
+            this.operation = operation;
+            if (inputs.Length == 0)
+            {
+                this.inputs = new List<String>();
+            }
+            else
+            {
+                this.inputs = inputs.ToList();
+            }
         }
 
 
@@ -41,7 +54,20 @@ namespace Evaluator.AST.Nodes
                 //    break;
                 case Ops.len:
                     return ((StringMatchList)args[0].Execute(symbols)).Length;
-                    break;
+
+                case Ops.find:
+                    String pattern = inputs[0];
+                    String file = inputs[1];
+                    StringMatchList matches = new StringMatchList();
+                    matches.AddMatch("Hey", file, 10, 30, 40);
+                    return matches;   
+
+                case Ops.intersec:
+                    StringMatchList list1 = (StringMatchList) args[0].Execute(symbols);
+                    StringMatchList list2 = (StringMatchList) args[1].Execute(symbols);
+
+                    StringMatchList intersect = list1.Intersect(list2);
+                    return intersect;
                 default:
                     throw new NotImplementedException();
             }

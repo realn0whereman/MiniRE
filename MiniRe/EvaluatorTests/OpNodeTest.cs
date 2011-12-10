@@ -1,20 +1,20 @@
 ﻿using Evaluator.AST.Nodes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using Evaluator.AST;
 using Evaluator;
 using Evaluator.Variables;
+using Evaluator.AST;
 
 namespace EvaluatorTests
 {
     
     
     /// <summary>
-    ///This is a test class for AssignNodeTest and is intended
-    ///to contain all AssignNodeTest Unit Tests
+    ///This is a test class for OpNodeTest and is intended
+    ///to contain all OpNodeTest Unit Tests
     ///</summary>
     [TestClass()]
-    public class AssignNodeTest
+    public class OpNodeTest
     {
 
 
@@ -80,14 +80,31 @@ namespace EvaluatorTests
             SymbolTable symbols = new SymbolTable();
             symbols[varName] = varValue;
 
-            LookupNode expression = new LookupNode(varName);
-            OpNode len = new OpNode(Ops.len, expression);
-            string outputVar = "output";
-            AssignNode assign = new AssignNode(outputVar, len);
-            object actualValue = assign.Execute(symbols);
 
-            Assert.AreEqual(varValue.Length, actualValue);
-            Assert.AreEqual(varValue.Length, Int32.Parse(symbols[outputVar].ToString()));
+            string pattern1 = "[A-Z a-z]*ment[A-Z a-z]*";
+            string file1 = "file1.txt";
+            OpNode find1 = new OpNode(Ops.find, pattern1, file1);
+
+            string pattern2 = "A|a) [A-Z a-z]*'";
+            string file2 = "file2.txt";
+            OpNode find2 = new OpNode(Ops.find, pattern2, file2);
+
+            OpNode intersect = new OpNode(Ops.intersec, find1, find2);
+            StringMatchList intersectList = (StringMatchList) intersect.Execute(symbols);
+
+            
+           
+
+
+
+            //LookupNode expression = new LookupNode(varName);
+            //OpNode len = new OpNode(Ops.len, expression);
+            //string outputVar = "output";
+            //AssignNode assign = new AssignNode(outputVar, len);
+            //object actualValue = assign.Execute(symbols);
+
+            //Assert.AreEqual(varValue.Length, actualValue);
+            //Assert.AreEqual(varValue.Length, Int32.Parse(symbols[outputVar].ToString()));
         }
     }
 }
