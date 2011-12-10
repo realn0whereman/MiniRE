@@ -7,15 +7,21 @@ namespace ParserGenerator
 {
     public class ParserGenerator
     {
-        enum rules { };
-        Dictionary<String, Dictionary<String, String>> parseTable;
+        public enum rules { };
+        Dictionary<String, Dictionary<String, List<String>>> parseTable;
         StreamReader grammarFile;
         public ParserGenerator() {
             constructParseTable();
         }
 
         private void constructParseTable() {
-            parseTable.Add();
+            parseTable.Add("<MiniRE-program>",
+                new Dictionary<String, List<String>>()
+            );
+            parseTable["<MiniRE-program>"].Add("begin", new List<String>());
+            parseTable["<MiniRE-program>"]["begin"].Add("begin");
+            parseTable["<MiniRE-program>"]["begin"].Add("<statement-list>");
+            parseTable["<MiniRE-program>"]["begin"].Add("end");
         }
 
         public String getRuleMatchingToken(String currentState, String token) {
