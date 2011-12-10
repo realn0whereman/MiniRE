@@ -1,20 +1,18 @@
-﻿using Evaluator.AST.Nodes;
+﻿using RDParser;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using Evaluator;
 using Evaluator.Variables;
-using Evaluator.AST;
 
 namespace EvaluatorTests
 {
     
     
     /// <summary>
-    ///This is a test class for OpNodeTest and is intended
-    ///to contain all OpNodeTest Unit Tests
+    ///This is a test class for RegexEvaluatorTest and is intended
+    ///to contain all RegexEvaluatorTest Unit Tests
     ///</summary>
     [TestClass()]
-    public class OpNodeTest
+    public class RegexEvaluatorTest
     {
 
 
@@ -68,43 +66,47 @@ namespace EvaluatorTests
 
 
         /// <summary>
-        ///A test for Execute
+        ///A test for Eval
         ///</summary>
         [TestMethod()]
-        public void ExecuteTest()
+        [DeploymentItem("RDParser.dll")]
+        public void RegexEvalTest1()
         {
-            //init symbol table
-            string varName = "test";
-            StringMatchList varValue = new StringMatchList();
-            varValue.AddMatch("sdf", "file1.txt", 30, 70, 100);
-            SymbolTable symbols = new SymbolTable();
-            symbols[varName] = varValue;
+            string pattern = "ste(ph|v)en";
+            string text = "stephen steve steven seven stepvhen sharks LOLOLOL";
 
+            StringMatchList list = RegexEvaluator.Eval(pattern, text);
+            string actual = "";
+            foreach (StringMatch match in list.Matches)
+            {
+                actual += match.Text;
+                actual+= " ";
+            }
 
-            string pattern1 = "([A-Za-z])*ment([A-Za-z])*";
-            string file1 = "../../../TestFiles/file1.txt";
-            OpNode find1 = new OpNode(Ops.find, pattern1, file1);
+            string expected = "stephen steven ";
+            Assert.AreEqual(expected, actual);          
+        }
 
-            string pattern2 = "(A|a) ([A-Za-z])*";
-            string file2 = "../../../TestFiles/file2.txt";
-            OpNode find2 = new OpNode(Ops.find, pattern2, file2);
+        /// <summary>
+        ///A test for Eval
+        ///</summary>
+        [TestMethod()]
+        [DeploymentItem("RDParser.dll")]
+        public void RegexEvalTest2()
+        {
+            string pattern = @"[a-zA-Z]([a-zA-Z]|[0-9])*@[a-zA-Z]([a-zA-Z]|[0-9])*\.[a-zA-Z]([a-zA-Z]|[0-9])*";
+            string text = "@ (*&#$(&(*&(@# stephen@iscool.com will@weredone.net llamas willbarr d0123@me.com 101@sdf.com sdf@1.com sdf@com.1";
 
-            OpNode intersect = new OpNode(Ops.intersec, find1, find2);
-            StringMatchList intersectList = (StringMatchList) intersect.Execute(symbols);
+            StringMatchList list = RegexEvaluator.Eval(pattern, text);
+            string actual = "";
+            foreach (StringMatch match in list.Matches)
+            {
+                actual += match.Text;
+                actual += " ";
+            }
 
-            
-           
-
-
-
-            //LookupNode expression = new LookupNode(varName);
-            //OpNode len = new OpNode(Ops.len, expression);
-            //string outputVar = "output";
-            //AssignNode assign = new AssignNode(outputVar, len);
-            //object actualValue = assign.Execute(symbols);
-
-            //Assert.AreEqual(varValue.Length, actualValue);
-            //Assert.AreEqual(varValue.Length, Int32.Parse(symbols[outputVar].ToString()));
+            string expected = "stephen@iscool.com will@weredone.net d0123@me.com ";
+            Assert.AreEqual(expected, actual);
         }
     }
 }

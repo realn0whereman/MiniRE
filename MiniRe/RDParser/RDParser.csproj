@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RegexEvaluator.cs" />
     <Compile Include="SyntaxError.cs" />
     <Compile Include="RDMain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -49,6 +50,14 @@
     <ProjectReference Include="..\GraphLibrary\GraphLibrary.csproj">
       <Project>{190FB332-7425-45DB-9568-63B01147DA0C}</Project>
       <Name>GraphLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NFA2DFA\NFA2DFA\NFA2DFA.csproj">
+      <Project>{F26D7A5D-2B9D-477C-8905-B06CF5792CE1}</Project>
+      <Name>NFA2DFA</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Variables\Variables.csproj">
+      <Project>{549263BA-C779-4C85-8575-F4276C70A767}</Project>
+      <Name>Variables</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

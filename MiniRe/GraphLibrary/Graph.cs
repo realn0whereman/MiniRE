@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.IO;
+using Evaluator.Variables;
 
 namespace GraphLibrary
 {
@@ -381,9 +382,9 @@ namespace GraphLibrary
             return current.Accepting;
         }
 
-        public List<String> FindTokens(String input)
+        public List<StringMatch> FindTokens(String input)
         {
-            List<String> tokens = new List<string>();
+            List<StringMatch> tokens = new List<StringMatch>();
             BaseVertex current = start;
             String currentToken = "";
 
@@ -405,7 +406,8 @@ namespace GraphLibrary
                 {
                     if (current.Accepting)
                     {
-                        tokens.Add(currentToken);
+                        StringMatch match = new StringMatch(currentToken, "", 0, x - currentToken.Length, x);
+                        tokens.Add(match);
                         x--;
                     }
                     //invalid input

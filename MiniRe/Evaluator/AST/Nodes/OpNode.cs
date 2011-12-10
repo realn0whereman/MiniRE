@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Evaluator.Variables;
+using RDParser;
+using System.IO;
 
 namespace Evaluator.AST.Nodes
 {
@@ -57,19 +59,43 @@ namespace Evaluator.AST.Nodes
 
                 case Ops.find:
                     String pattern = inputs[0];
-                    String file = inputs[1];
-                    StringMatchList matches = new StringMatchList();
-                    matches.AddMatch("Hey", file, 10, 30, 40);
-                    return matches;   
+                    String file = ReadFile(inputs[1]);
+
+                    StringMatchList matches = RegexEvaluator.Eval(pattern, file);
+                    return matches;
 
                 case Ops.intersec:
-                    StringMatchList list1 = (StringMatchList) args[0].Execute(symbols);
-                    StringMatchList list2 = (StringMatchList) args[1].Execute(symbols);
+                    StringMatchList list1 = (StringMatchList)args[0].Execute(symbols);
+                    StringMatchList list2 = (StringMatchList)args[1].Execute(symbols);
 
                     StringMatchList intersect = list1.Intersect(list2);
                     return intersect;
                 default:
                     throw new NotImplementedException();
+            }
+        }
+
+        private String ReadFile(string path)
+        {
+            using (FileStream fs = new FileStream(path, FileMode.Open))
+            {
+                using (StreamReader sr = new StreamReader(fs))
+                {
+                    StringBuilder sb = new StringBuilder();
+
+                    while (!sr.EndOfStream)
+                    {
+                        sb.AppendLine(sr.ReadLine());
+                    }
+
+                    String file = sb.ToString();
+
+                    file = file.Replace("\n", " ");
+                    file = file.Replace("\r", " ");
+                    
+                    return sb.ToString();
+                }
+
             }
         }
 
