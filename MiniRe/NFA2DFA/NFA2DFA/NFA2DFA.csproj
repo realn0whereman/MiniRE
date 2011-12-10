@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{118A4E45-5F70-42B2-BACF-5A2A5B94F5DE}</ProjectGuid>
+    <ProjectGuid>{F26D7A5D-2B9D-477C-8905-B06CF5792CE1}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MiniRe</RootNamespace>
-    <AssemblyName>MiniRe</AssemblyName>
+    <RootNamespace>NFA2DFA</RootNamespace>
+    <AssemblyName>NFA2DFA</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -34,18 +34,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <Compile Include="TestCases.cs" />
+    <Compile Include="TransitionTable.cs" />
+    <Compile Include="Converter.cs" />
+    <Compile Include="Driver.cs" />
+    <Compile Include="VertexSet.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LL1Parser.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\GraphLibrary\GraphLibrary.csproj">
+      <Project>{190FB332-7425-45DB-9568-63B01147DA0C}</Project>
+      <Name>GraphLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
