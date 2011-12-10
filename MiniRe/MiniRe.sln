@@ -20,6 +20,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphLibrary", "GraphLibrar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NFA2DFA", "NFA2DFA\NFA2DFA\NFA2DFA.csproj", "{F26D7A5D-2B9D-477C-8905-B06CF5792CE1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RDParser", "RDParser\RDParser.csproj", "{4B4C4D51-5CA7-47F7-B640-1F2675A86028}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Variables", "Variables\Variables.csproj", "{549263BA-C779-4C85-8575-F4276C70A767}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = MiniRe.vsmdi
@@ -93,6 +97,26 @@ Global
 		{F26D7A5D-2B9D-477C-8905-B06CF5792CE1}.Release|Mixed Platforms.Build.0 = Release|x86
 		{F26D7A5D-2B9D-477C-8905-B06CF5792CE1}.Release|x86.ActiveCfg = Release|x86
 		{F26D7A5D-2B9D-477C-8905-B06CF5792CE1}.Release|x86.Build.0 = Release|x86
+		{4B4C4D51-5CA7-47F7-B640-1F2675A86028}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B4C4D51-5CA7-47F7-B640-1F2675A86028}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B4C4D51-5CA7-47F7-B640-1F2675A86028}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4B4C4D51-5CA7-47F7-B640-1F2675A86028}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4B4C4D51-5CA7-47F7-B640-1F2675A86028}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4B4C4D51-5CA7-47F7-B640-1F2675A86028}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B4C4D51-5CA7-47F7-B640-1F2675A86028}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B4C4D51-5CA7-47F7-B640-1F2675A86028}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4B4C4D51-5CA7-47F7-B640-1F2675A86028}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{4B4C4D51-5CA7-47F7-B640-1F2675A86028}.Release|x86.ActiveCfg = Release|Any CPU
+		{549263BA-C779-4C85-8575-F4276C70A767}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{549263BA-C779-4C85-8575-F4276C70A767}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{549263BA-C779-4C85-8575-F4276C70A767}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{549263BA-C779-4C85-8575-F4276C70A767}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{549263BA-C779-4C85-8575-F4276C70A767}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{549263BA-C779-4C85-8575-F4276C70A767}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{549263BA-C779-4C85-8575-F4276C70A767}.Release|Any CPU.Build.0 = Release|Any CPU
+		{549263BA-C779-4C85-8575-F4276C70A767}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{549263BA-C779-4C85-8575-F4276C70A767}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{549263BA-C779-4C85-8575-F4276C70A767}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
