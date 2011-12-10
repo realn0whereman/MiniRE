@@ -14,5 +14,7 @@ namespace MiniRe
             // TODO: Complete member initialization
             this.contents = contents;
         }
+
+
     }
 }

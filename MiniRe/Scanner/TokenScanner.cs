@@ -60,7 +60,7 @@ namespace Scanner
             }
             catch (IndexOutOfRangeException ioore)
             {
-                System.Console.WriteLine("Syntax error")
+                System.Console.WriteLine("Syntax error");
 
             }
         }
