@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Evaluator.AST.Nodes
 {
+    /// <summary>
+    /// Used for looking up a value from the symbol table
+    /// </summary>
     public class LookupNode : Node
     {
         string varName;
