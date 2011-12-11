@@ -50,8 +50,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssignNodeTest.cs" />
-    <Compile Include="OpNodeTest.cs" />
+    <Compile Include="MiniRETest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegexEvaluatorTest.cs" />
   </ItemGroup>

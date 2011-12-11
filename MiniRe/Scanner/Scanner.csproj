@@ -40,8 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LexicalException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TokenScanner.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RDParser\RDParser.csproj">
+      <Project>{4B4C4D51-5CA7-47F7-B640-1F2675A86028}</Project>
+      <Name>RDParser</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
