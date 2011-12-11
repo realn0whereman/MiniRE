@@ -94,7 +94,7 @@ namespace EvaluatorTests
 
             #region Statement 1
             AssignmentStatement asStmt = new AssignmentStatement();
-            asStmt.Id = "x";
+            asStmt.Id = new StringNode("x");
             statement.AssignmentStatement = asStmt;
 
             Exp exp = new Exp();
@@ -115,7 +115,7 @@ namespace EvaluatorTests
             #region Statement 2
 
             AssignmentStatement as2 = new AssignmentStatement();
-            as2.Id = "y";
+            as2.Id = new StringNode("y");
             as2.Type = AssignmentStatementType.Length;
             s2.AssignmentStatement = as2;
 
@@ -158,7 +158,7 @@ namespace EvaluatorTests
 
             #region Statement 1
             AssignmentStatement asStmt = new AssignmentStatement();
-            asStmt.Id = "x";
+            asStmt.Id = new StringNode("x");
             statement.AssignmentStatement = asStmt;
 
             Exp exp = new Exp();
@@ -179,7 +179,7 @@ namespace EvaluatorTests
             #region Statement 2
 
             AssignmentStatement as2 = new AssignmentStatement();
-            as2.Id = "y";
+            as2.Id = new StringNode("y");
             as2.Type = AssignmentStatementType.Length;
             s2.AssignmentStatement = as2;
 
@@ -251,7 +251,7 @@ namespace EvaluatorTests
 
             #region Statement 1
             AssignmentStatement asStmt = new AssignmentStatement();
-            asStmt.Id = "x";
+            asStmt.Id = new StringNode("x");
             statement.AssignmentStatement = asStmt;
 
             Exp exp = new Exp();
@@ -272,7 +272,7 @@ namespace EvaluatorTests
             #region Statement 2
 
             AssignmentStatement as2 = new AssignmentStatement();
-            as2.Id = "y";
+            as2.Id = new StringNode("y");
             as2.Type = AssignmentStatementType.Length;
             s2.AssignmentStatement = as2;
 
@@ -371,6 +371,53 @@ namespace EvaluatorTests
                 }
             }
             Assert.AreEqual(expected, actual.ToString());
+        }
+        [TestMethod()]
+        public void Maxfreqstr()
+        {
+            SymbolTable table = new SymbolTable();
+
+            MiniRE miniRe = new MiniRE();
+
+            StatementList sl = new StatementList();
+            miniRe.StatementList = sl;
+
+            Statement statement = new Statement();
+            statement.Id = new StringNode("x");
+            sl.Statement = statement;
+
+            AssignmentStatement as1 = new AssignmentStatement();
+            statement.AssignmentStatement = as1;
+
+            Exp exp1 = new Exp();
+            as1.Exp = exp1;
+
+            Term term = new Term();
+            exp1.Term = term;
+
+            Regex r1 = new Regex();
+            r1.Pattern = "[a-z]([a-z])*";
+            term.Regex = r1;
+
+            Filename filename = new Filename();
+            filename.Path = "../../../TestFiles/maxfreq.txt";
+            term.Filename = filename;
+
+
+            StatementListTail tail = new StatementListTail();
+            sl.Tail = tail;
+
+            Statement s2 = new Statement();
+            s2.Id = new StringNode("y");
+            tail.Statement = s2;
+
+            AssignmentStatement as2 = new AssignmentStatement();
+            as2.Type = AssignmentStatementType.MaxFreqString;
+            as2.Id = new StringNode("x");
+            s2.AssignmentStatement = as2;
+
+            miniRe.Execute(table);
+            Assert.AreEqual("hey", table["y"]);            
         }
     }
 }

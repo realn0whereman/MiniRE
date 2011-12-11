@@ -9,6 +9,11 @@ namespace Evaluator.AST_New
     {
         string token;
 
+        public StringNode(String token)
+        {
+            this.token = token;
+        }
+
         public string Token
         {
             get { return token; }

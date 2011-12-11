@@ -9,13 +9,16 @@ namespace Evaluator.AST_New
     {
         AssignmentStatement assignmentStatement;
         OtherStatement otherStatement;
+        StringNode id;
+
+        
 
         public override object Execute(SymbolTable table)
         {
             base.Execute(table);
             if (assignmentStatement != null)
             {
-                assignmentStatement.Execute(table);
+                table[Id.Token] = assignmentStatement.Execute(table);
             }
             else if (otherStatement != null)
             {
@@ -34,6 +37,11 @@ namespace Evaluator.AST_New
         {
             get { return otherStatement; }
             set { otherStatement = value; }
+        }
+        public StringNode Id
+        {
+            get { return id; }
+            set { id = value; }
         }
         
     }
