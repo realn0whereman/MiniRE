@@ -43,7 +43,10 @@
     <Compile Include="AST_New\AssignmentStatement.cs" />
     <Compile Include="AST_New\Exp.cs" />
     <Compile Include="AST_New\ExpList.cs" />
+    <Compile Include="AST_New\ExpListTail.cs" />
+    <Compile Include="AST_New\ExpTail.cs" />
     <Compile Include="AST_New\Filename.cs" />
+    <Compile Include="AST_New\Filenames.cs" />
     <Compile Include="AST_New\MiniRE.cs" />
     <Compile Include="AST_New\Node.cs" />
     <Compile Include="AST_New\OtherStatement.cs" />

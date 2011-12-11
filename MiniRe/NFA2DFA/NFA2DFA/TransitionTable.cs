@@ -115,19 +115,19 @@ namespace NFA2DFA
         }
 
         public void printTable() {
-            Console.Write("Column Names: ");
+            //Console.Write("Column Names: ");
             foreach (string s in columnNames) {
-                Console.Write(s + ",");
+                //Console.Write(s + ",");
             }
-            Console.WriteLine();
+            //Console.WriteLine();
             for (int i = 0; i < rowNames.Count; i++) {
                 ((VertexSet)rowNames[i]).printVertexSet();
-                Console.Write("|");
+                //Console.Write("|");
                 for (int j = 0; j < columnNames.Count; j++) {
                     ((VertexSet)table[j][i]).printVertexSet();
-                    Console.Write("|");
+                    //Console.Write("|");
                 }
-                Console.WriteLine();
+                //Console.WriteLine();
             }
         }
 

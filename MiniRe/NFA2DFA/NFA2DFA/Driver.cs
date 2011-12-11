@@ -57,11 +57,11 @@ namespace NFA2DFA
 
             Converter c = new Converter(g,epsilon);
 
-            Console.WriteLine();
+            //Console.WriteLine();
             c.convertToDFA(v0);
             //String dfaDOT = c.table.createGraph().ToDOT("DFA");
-            Console.WriteLine("Done");
-            Console.ReadLine();
+            //Console.WriteLine("Done");
+            //Console.ReadLine();
         }
     }
 }

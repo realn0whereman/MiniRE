@@ -93,11 +93,11 @@ namespace NFA2DFA
 
 
         public void printVertexSet() { // replace with toString
-            Console.Write("{");
+           // Console.Write("{");
             foreach (BaseVertex v in vertices) {
-                Console.Write(v.Name + ",");
+                //Console.Write(v.Name + ",");
             }
-            Console.Write("}");
+            //Console.Write("}");
         }
 
         public override string ToString()

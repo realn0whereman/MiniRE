@@ -592,7 +592,7 @@ namespace GraphLibrary
                 sb.Append("\n");
             }
 
-            Console.WriteLine(sb.ToString());
+           // Console.WriteLine(sb.ToString());
         }
     }
 }

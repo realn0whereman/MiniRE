@@ -8,6 +8,7 @@ namespace Evaluator.AST_New
     public class Statement : Node
     {
         AssignmentStatement assignmentStatement;
+        OtherStatement otherStatement;
 
         public override object Execute(SymbolTable table)
         {
@@ -15,6 +16,10 @@ namespace Evaluator.AST_New
             if (assignmentStatement != null)
             {
                 assignmentStatement.Execute(table);
+            }
+            else if (otherStatement != null)
+            {
+                otherStatement.Execute(table);
             }
 
             return null;
@@ -24,6 +29,11 @@ namespace Evaluator.AST_New
         {
             get { return assignmentStatement; }
             set { assignmentStatement = value; }
+        }
+        public OtherStatement OtherStatement
+        {
+            get { return otherStatement; }
+            set { otherStatement = value; }
         }
         
     }
