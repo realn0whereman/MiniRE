@@ -1,0 +1,3 @@
+begin
+replace 'a' with "b" in "abc.txt" >! "abc_out.txt";
+end

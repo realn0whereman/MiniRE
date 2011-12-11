@@ -30,7 +30,7 @@ namespace MiniRe
             tokens.Push("<MiniRE-program>");
             
             Stack<Node> nodes = new Stack<Node>();
-            Node lastOff = new Node();  
+            Node miniRE = new Node();  
 
             while (tokens.Count != 0)
             {
@@ -72,9 +72,9 @@ namespace MiniRe
                         if (nodes.Count != 0)
                             nodes.Peek().Nodes.Add(newElem);
 
-                        if (nodes.Count != 0 && nodes.Peek().IsFull)
+                        if (nodes.Count != 0 && nodes.Peek().IsFull && nodes.Peek() is MiniRE)
                         {
-                            lastOff = nodes.Pop();
+                            miniRE = nodes.Pop();
                         }
 
                         nodes.Push(newElem);
@@ -95,8 +95,8 @@ namespace MiniRe
                         newElem.Nodes.Add(sn);
                         nodes.Peek().Nodes.Add(newElem);
 
-                        if (nodes.Peek().IsFull)
-                            lastOff = nodes.Pop();
+                        if (nodes.Peek().IsFull && nodes.Peek() is MiniRE)
+                            miniRE = nodes.Pop();
                     }
 
                 }
@@ -183,7 +183,7 @@ namespace MiniRe
                 }
             }
 
-            return lastOff;
+            return miniRE;
         }
 
 
@@ -211,6 +211,21 @@ namespace MiniRe
                     return new Exp();
                 case "exp-list":
                     return new ExpList();
+                case "bin-op":
+                    return new BinOp();
+                case "term":
+                    return new Term();
+                case "file-names":
+                    return new Filenames();
+                case "source-file":
+                    return new Filename();
+                case "destination-file":
+                    return new Filename();
+                case "exp-list-tail":
+                    return new ExpListTail();
+                case "exp-tail":
+                    return new ExpTail();
+
 
             }
 

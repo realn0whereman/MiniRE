@@ -127,27 +127,16 @@ namespace Evaluator.AST_New
         {
             get
             {
-                int count = 0;
                 if (Nodes.Count == 0)
                     return false;
 
-                StringNode info = (StringNode)Nodes[0];
-                int expected;
-                if (info.Token == "print")
-                    expected = 1;
-                else
-                    expected = 3;
+                if (this.Mode == OtherStatementMode.Print)
+                    return Nodes.Count == 1;
+                if(this.Mode == OtherStatementMode.RecursiveReplace || this.Mode == OtherStatementMode.Replace)
+                    return Nodes.Count == 3;
 
+                throw new Exception("SHOULD NEVER, EVER HAPPEN.");
 
-                foreach (Node n in Nodes)
-                {
-                    if (!(n is StringNode))
-                        count++;
-                }
-                if (count == expected)
-                    return true;
-                else
-                    return false;
             }
         }
     }
