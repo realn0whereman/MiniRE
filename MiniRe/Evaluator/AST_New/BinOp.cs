@@ -5,21 +5,13 @@ using System.Text;
 
 namespace Evaluator.AST_New
 {
-    public class StringNode : Node
+    public class BinOp : Node
     {
-        string token;
-
-        public string Token
-        {
-            get { return token; }
-            set { token = value; }
-        }
-
         public override bool IsFull
         {
             get
             {
-                return true;
+                return Nodes.Count == 1;
             }
         }
     }

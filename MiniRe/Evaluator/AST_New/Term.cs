@@ -41,5 +41,13 @@ namespace Evaluator.AST_New
             get { return regex; }
             set { regex = value; }
         }
+
+        public override bool IsFull
+        {
+            get
+            {
+                return Nodes.Count == 2;
+            }
+        }
     }
 }

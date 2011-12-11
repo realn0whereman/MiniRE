@@ -8,5 +8,12 @@ namespace Evaluator.AST_New
     public class ExpTail : Node
     {
 
+        public override bool IsFull
+        {
+            get
+            {
+                return Nodes.Count == 3;
+            }
+        }
     }
 }
