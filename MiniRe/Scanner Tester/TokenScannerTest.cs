@@ -73,7 +73,7 @@ namespace Scanner_Tester
         [DeploymentItem("Scanner.dll")]
         public void scanTestPass()
         {
-            TokenScanner scanner = new TokenScanner("C:\\scanTestPass.txt");
+            TokenScanner scanner = new TokenScanner("..\\..\\..\\TestFiles\\scanTestPass.txt");
             Assert.AreEqual(scanner.getToken(), "begin");
             Assert.AreEqual(scanner.getToken(), "hi");
             Assert.AreEqual(scanner.getToken(), "=");
@@ -91,7 +91,7 @@ namespace Scanner_Tester
         {
             try
             {
-                TokenScanner scanner = new TokenScanner("C:\\ScanTestWordToLong.txt");
+                TokenScanner scanner = new TokenScanner("..\\..\\..\\TestFiles\\ScanTestWordToLong.txt");
                 Assert.Fail();
             }
             catch(SyntaxError)
@@ -107,7 +107,7 @@ namespace Scanner_Tester
         {
             try
             {
-                TokenScanner scanner = new TokenScanner("C:\\ScanTestFailBadSymbol.txt");
+                TokenScanner scanner = new TokenScanner("..\\..\\..\\TestFiles\\ScanTestFailBadSymbol.txt");
                 Assert.Fail();
             }
             catch (LexicalException)
@@ -117,18 +117,10 @@ namespace Scanner_Tester
         }
 
         [TestMethod()]
-        public void scanMyTest()
-        {
-            TokenScanner scanner = new TokenScanner("C:\\ex1.txt");
-            Console.WriteLine(scanner.getToken());
-            int nothing = 0;
-        }
-
-        [TestMethod()]
         [DeploymentItem("Scanner.dll")]
         public void scanBreakUp()
         {
-            TokenScanner scanner = new TokenScanner("C:\\ScanTestBreakUp.txt");
+            TokenScanner scanner = new TokenScanner("..\\..\\..\\TestFiles\\ScanTestBreakUp.txt");
             Assert.AreEqual(scanner.peekToken(), "break");
             Assert.AreEqual(scanner.getToken(), "break");
             Assert.AreEqual(scanner.getToken(), "(");

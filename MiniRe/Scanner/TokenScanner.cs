@@ -140,21 +140,29 @@ namespace Scanner
                                 break;
 
                             default:
-                                int count = 10;
+                                int count = 1;
                                 if(isaLetter(line[stop]))
                                 {
                                     slab.Append(line[stop]);
                                     stop++;
 
-                                    while (stop < line.Length && isValidIDChar(line[stop]) && count > 0)
+                                    while (stop < line.Length && isValidIDChar(line[stop]))
                                     {
                                         slab.Append(line[stop]);
                                         stop++;
-                                        count--;
+                                        count++;
                                     }
-                                    if (count == 0)
+                                    if (count > 10)
                                     {
-                                        throw new SyntaxError("Identifier to long. Line number: " + (index + 1) + " column: " + stop +  " Word starts with: " + slab);
+                                        if (slab.ToString() == "recursivereplace")
+                                        {
+                                            tokens.Enqueue(slab.ToString());
+                                            slab.Clear();
+                                        }
+                                        else
+                                        {
+                                            throw new SyntaxError("Identifier to long. Line number: " + (index + 1) + " column: " + stop + " Word starts with: " + slab);
+                                        }
                                     }
                                     else
                                     {
