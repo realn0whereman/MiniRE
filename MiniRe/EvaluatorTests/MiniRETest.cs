@@ -81,12 +81,14 @@ namespace EvaluatorTests
             miniRe.StatementList = sl;
 
             Statement statement = new Statement();
+            statement.Id = new StringNode("x");
             sl.Statement = statement;
 
             StatementListTail tail = new StatementListTail();
             sl.Tail = tail;
 
             Statement s2 = new Statement();
+            s2.Id = new StringNode("y");
             tail.Statement = s2;
 
             StatementListTail tail2 = new StatementListTail();
@@ -94,7 +96,6 @@ namespace EvaluatorTests
 
             #region Statement 1
             AssignmentStatement asStmt = new AssignmentStatement();
-            asStmt.Id = new StringNode("x");
             statement.AssignmentStatement = asStmt;
 
             Exp exp = new Exp();
@@ -115,7 +116,6 @@ namespace EvaluatorTests
             #region Statement 2
 
             AssignmentStatement as2 = new AssignmentStatement();
-            as2.Id = new StringNode("y");
             as2.Type = AssignmentStatementType.Length;
             s2.AssignmentStatement = as2;
 
@@ -145,12 +145,14 @@ namespace EvaluatorTests
             miniRe.StatementList = sl;
 
             Statement statement = new Statement();
+            statement.Id = new StringNode("x");
             sl.Statement = statement;
 
             StatementListTail tail = new StatementListTail();
             sl.Tail = tail;
 
             Statement s2 = new Statement();
+            s2.Id = new StringNode("y");
             tail.Statement = s2;
 
             StatementListTail tail2 = new StatementListTail();
@@ -158,7 +160,6 @@ namespace EvaluatorTests
 
             #region Statement 1
             AssignmentStatement asStmt = new AssignmentStatement();
-            asStmt.Id = new StringNode("x");
             statement.AssignmentStatement = asStmt;
 
             Exp exp = new Exp();
@@ -179,7 +180,6 @@ namespace EvaluatorTests
             #region Statement 2
 
             AssignmentStatement as2 = new AssignmentStatement();
-            as2.Id = new StringNode("y");
             as2.Type = AssignmentStatementType.Length;
             s2.AssignmentStatement = as2;
 
@@ -238,12 +238,14 @@ namespace EvaluatorTests
             miniRe.StatementList = sl;
 
             Statement statement = new Statement();
+            statement.Id = new StringNode("x");
             sl.Statement = statement;
 
             StatementListTail tail = new StatementListTail();
             sl.Tail = tail;
 
             Statement s2 = new Statement();
+            s2.Id = new StringNode("y");
             tail.Statement = s2;
 
             StatementListTail tail2 = new StatementListTail();
@@ -251,7 +253,6 @@ namespace EvaluatorTests
 
             #region Statement 1
             AssignmentStatement asStmt = new AssignmentStatement();
-            asStmt.Id = new StringNode("x");
             statement.AssignmentStatement = asStmt;
 
             Exp exp = new Exp();
@@ -272,7 +273,6 @@ namespace EvaluatorTests
             #region Statement 2
 
             AssignmentStatement as2 = new AssignmentStatement();
-            as2.Id = new StringNode("y");
             as2.Type = AssignmentStatementType.Length;
             s2.AssignmentStatement = as2;
 

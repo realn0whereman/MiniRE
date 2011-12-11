@@ -10,14 +10,13 @@ namespace Evaluator.AST_New
         string token;
         private string p;
 
-        public StringNode(string p)
-        {
-            // TODO: Complete member initialization
-            this.p = p;
-        }
         public StringNode()
         {
-            this.p = "";
+            this.token = "";
+        }
+        public StringNode(string token)
+        {
+            this.token = token;
         }
 
         public string Token
