@@ -1,9 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Collections.Queue;
+using System.Collections;
 using System.Linq;
 using System.Text;
+
+using RDParser;
 
 namespace Scanner
 {
@@ -12,10 +14,17 @@ namespace Scanner
         private Queue<String> tokens;
         private String fileName;
 
+        public TokenScanner()
+        {
+            fileName = null;
+            tokens = null;
+        }
+
         public TokenScanner(String fileName)
         {
             this.fileName = fileName;
             this.tokens = new Queue<String>();
+            scanFile();
         }
 
         private void scanFile()
@@ -79,15 +88,56 @@ namespace Scanner
                             case '=':
                                 tokens.Enqueue("=");
                                 break;
+                            
+                            case ' ':
+                                break;
+
+                            case '\n':
+                                break;
+
+                            case '\t':
+                                break;
+
+                            case '\r':
+                                break;
+
+                            default:
+                                int count = 9;
+                                if(isaLetter(line[stop]))
+                                {
+                                    slab.Append(line[stop]);
+                                    stop++;
+
+                                    while(isValidIDChar(line[stop]) && count > 0)
+                                    {
+                                        slab.Append(line[stop]);
+                                        stop++;
+                                        count--;
+                                    }
+                                    if (count == 0)
+                                    {
+                                        throw new SyntaxError("Identifier to long. Line number: " + (index + 1) + " Word starts with: " + slab);
+                                    }
+                                    else
+                                    {
+                                        tokens.Enqueue(slab.ToString());
+                                        slab.Clear();
+                                    }
+                                }
+                                else
+                                {
+                                    throw new LexicalException("Lexical Exception! Problem is on line: " + (index + 1) + " char: " + stop);
+                                }
+                                break;
                         }
                     }
                 }
             }
-            //catch (FileNotFoundException fnfe)
-            //{
-            //    System.Console.WriteLine("ERROR File not found. Given name was: " + this.fileName);
-            //    Environment.Exit(1);
-            //}
+            catch (FileNotFoundException)
+            {
+                System.Console.WriteLine("ERROR File not found. Given name was: " + this.fileName);
+                Environment.Exit(1);
+            }
             catch (IOException ioe)
             {
                 System.Console.WriteLine("ERROR and IO Exception has occured while scanning the file. Exception Method:");
@@ -97,22 +147,60 @@ namespace Scanner
                 System.Console.WriteLine(Environment.StackTrace);
                 Environment.Exit(1);
             }
-            catch (IndexOutOfRangeException ioore)
+            catch (IndexOutOfRangeException)
             {
-
-                System.Console.WriteLine("Syntax error on line: " + index + " missed \" or \'.");
+                System.Console.WriteLine("Syntax error on line: " + (index + 1) + " missed \" or \'.");
                 Environment.Exit(1);
             }
         }
 
         public String getToken()
         {
-            return tokens.Dequeue();
+            try
+            {
+                return tokens.Dequeue();
+            }
+            catch(InvalidOperationException)
+            {
+                return "$";
+            }
         }
 
         public String peekToken()
         {
-            return tokens.Peek();
+            try
+            {
+                return tokens.Peek();
+            }
+            catch (InvalidOperationException)
+            {
+                return "$";
+            }
+        }
+
+        public bool isaLetter(char letter)
+        {
+            if ((letter >= 65 && letter <= 90) || (letter >= 97 && letter <= 122))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool isaDigit(char digit)
+        {
+            if (digit >= 48 && digit <= 57)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool isValidIDChar(char letter)
+        {
+            return isaDigit(letter) || isaLetter(letter) || letter == '_';
         }
     }
 }
