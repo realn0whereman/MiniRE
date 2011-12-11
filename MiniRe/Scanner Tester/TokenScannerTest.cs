@@ -73,16 +73,16 @@ namespace Scanner_Tester
         [DeploymentItem("Scanner.dll")]
         public void scanTestPass()
         {
-            TokenScanner scanner = new TokenScanner("scanTestPass.txt");
-            Assert.Equals(scanner.getToken(), "begin");
-            Assert.Equals(scanner.getToken(), "hi");
-            Assert.Equals(scanner.getToken(), "=");
-            Assert.Equals(scanner.getToken(), "a");
-            Assert.Equals(scanner.getToken(), "union");
-            Assert.Equals(scanner.getToken(), "b");
-            Assert.Equals(scanner.getToken(), ";");
-            Assert.Equals(scanner.getToken(), "end");
-            Assert.Equals(scanner.getToken(), "$");
+            TokenScanner scanner = new TokenScanner("C:\\scanTestPass.txt");
+            Assert.AreEqual(scanner.getToken(), "begin");
+            Assert.AreEqual(scanner.getToken(), "hi");
+            Assert.AreEqual(scanner.getToken(), "=");
+            Assert.AreEqual(scanner.getToken(), "a");
+            Assert.AreEqual(scanner.getToken(), "union");
+            Assert.AreEqual(scanner.getToken(), "b");
+            Assert.AreEqual(scanner.getToken(), ";");
+            Assert.AreEqual(scanner.getToken(), "end");
+            Assert.AreEqual(scanner.getToken(), "$");
         }
 
         [TestMethod()]
@@ -91,7 +91,7 @@ namespace Scanner_Tester
         {
             try
             {
-                TokenScanner scanner = new TokenScanner("ScanTestWordToLong.txt");
+                TokenScanner scanner = new TokenScanner("C:\\ScanTestWordToLong.txt");
                 Assert.Fail();
             }
             catch(SyntaxError)
@@ -107,7 +107,7 @@ namespace Scanner_Tester
         {
             try
             {
-                TokenScanner scanner = new TokenScanner("ScanTestFailBadSymbol.txt");
+                TokenScanner scanner = new TokenScanner("C:\\ScanTestFailBadSymbol.txt");
                 Assert.Fail();
             }
             catch (LexicalException)
@@ -117,26 +117,34 @@ namespace Scanner_Tester
         }
 
         [TestMethod()]
+        public void scanMyTest()
+        {
+            TokenScanner scanner = new TokenScanner("C:\\ex1.txt");
+            Console.WriteLine(scanner.getToken());
+            int nothing = 0;
+        }
+
+        [TestMethod()]
         [DeploymentItem("Scanner.dll")]
         public void scanBreakUp()
         {
-            TokenScanner scanner = new TokenScanner("ScanTestBreakUp.txt");
-            Assert.Equals(scanner.peekToken(), "break");
-            Assert.Equals(scanner.getToken(), "break");
-            Assert.Equals(scanner.getToken(), "(");
-            Assert.Equals(scanner.getToken(), "up");
-            Assert.Equals(scanner.getToken(), ")");
-            Assert.Equals(scanner.getToken(), "(");
-            Assert.Equals(scanner.getToken(), "this");
-            Assert.Equals(scanner.getToken(), ")");
-            Assert.Equals(scanner.getToken(), "(");
-            Assert.Equals(scanner.getToken(), ")");
-            Assert.Equals(scanner.getToken(), ";");
-            Assert.Equals(scanner.getToken(), "l");
-            Assert.Equals(scanner.getToken(), ";");
-            Assert.Equals(scanner.getToken(), "ol");
-            Assert.Equals(scanner.getToken(), "$");
-            Assert.Equals(scanner.peekToken(), "");
+            TokenScanner scanner = new TokenScanner("C:\\ScanTestBreakUp.txt");
+            Assert.AreEqual(scanner.peekToken(), "break");
+            Assert.AreEqual(scanner.getToken(), "break");
+            Assert.AreEqual(scanner.getToken(), "(");
+            Assert.AreEqual(scanner.getToken(), "up");
+            Assert.AreEqual(scanner.getToken(), ")");
+            Assert.AreEqual(scanner.getToken(), "(");
+            Assert.AreEqual(scanner.getToken(), "this");
+            Assert.AreEqual(scanner.getToken(), ")");
+            Assert.AreEqual(scanner.getToken(), "(");
+            Assert.AreEqual(scanner.getToken(), ")");
+            Assert.AreEqual(scanner.getToken(), ";");
+            Assert.AreEqual(scanner.getToken(), "l");
+            Assert.AreEqual(scanner.getToken(), ";");
+            Assert.AreEqual(scanner.getToken(), "ol");
+            Assert.AreEqual(scanner.getToken(), "$");
+            Assert.AreEqual(scanner.peekToken(), "$");
         }
         /// <summary>
         ///A test for isaLetter

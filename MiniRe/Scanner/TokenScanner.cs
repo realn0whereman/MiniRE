@@ -51,6 +51,10 @@ namespace Scanner
                                 {
                                     slab.Append(line[stop]);
                                     stop++;
+                                    if (stop >= line.Length)
+                                    {
+                                        throw new SyntaxError("Ascii Strings must begin and end on the same line.");
+                                    }
                                 }
                                 slab.Append("\"");
                                 stop++;
@@ -66,6 +70,10 @@ namespace Scanner
                                 {
                                     slab.Append(line[stop]);
                                     stop++;
+                                    if (stop >= line.Length)
+                                    {
+                                        throw new SyntaxError("Regex Definitions must begin and end on the same line");
+                                    }
                                 }
                                 slab.Append("\'");
                                 stop++;
@@ -74,31 +82,39 @@ namespace Scanner
                                 break;
 
                             case '(':
+                                stop++;
                                 tokens.Enqueue("(");
                                 break;
 
                             case ')':
+                                stop++;
                                 tokens.Enqueue(")");
                                 break;
                             
                             case ';':
+                                stop++;
                                 tokens.Enqueue(";");
                                 break;
                             
                             case '=':
+                                stop++;
                                 tokens.Enqueue("=");
                                 break;
                             
                             case ' ':
+                                stop++;
                                 break;
 
                             case '\n':
+                                stop++;
                                 break;
 
                             case '\t':
+                                stop++;
                                 break;
 
                             case '\r':
+                                stop++;
                                 break;
 
                             default:
@@ -108,7 +124,7 @@ namespace Scanner
                                     slab.Append(line[stop]);
                                     stop++;
 
-                                    while(isValidIDChar(line[stop]) && count > 0)
+                                    while (stop < line.Length && isValidIDChar(line[stop]) && count > 0)
                                     {
                                         slab.Append(line[stop]);
                                         stop++;
@@ -136,7 +152,7 @@ namespace Scanner
             catch (FileNotFoundException)
             {
                 System.Console.WriteLine("ERROR File not found. Given name was: " + this.fileName);
-                Environment.Exit(1);
+                //Environment.Exit(1);
             }
             catch (IOException ioe)
             {
@@ -145,12 +161,12 @@ namespace Scanner
                 System.Console.WriteLine("");
                 System.Console.WriteLine("Stack Trace:");
                 System.Console.WriteLine(Environment.StackTrace);
-                Environment.Exit(1);
+                //Environment.Exit(1);
             }
             catch (IndexOutOfRangeException)
             {
-                System.Console.WriteLine("Syntax error on line: " + (index + 1) + " missed \" or \'.");
-                Environment.Exit(1);
+                throw new SyntaxError("Syntax error on line: " + (index + 1) + " missed \" or \'.");
+                //Environment.Exit(1);
             }
         }
 
