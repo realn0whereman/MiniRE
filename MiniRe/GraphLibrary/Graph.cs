@@ -409,7 +409,8 @@ namespace GraphLibrary
                     {
                         StringMatch match = new StringMatch(currentToken, "", line);
                         tokens.Add(match);
-                        x--;
+                        if(x < input.Length-1)
+                            x--;
                     }
                     else
                     {

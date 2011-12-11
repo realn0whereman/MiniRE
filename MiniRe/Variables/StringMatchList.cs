@@ -33,7 +33,7 @@ namespace Evaluator.Variables
             foreach (StringMatch match in matches)
             {
                 current = match;
-                if (ContainsString(s))
+                if (match.Text == s)
                 {
                     remove = true;
                     break;
@@ -56,6 +56,7 @@ namespace Evaluator.Variables
                     if (s1.Matches(s2))
                     {
                         list.AddMatch(s1);
+                        list.AddMatch(s2);
                     }
                 }
             }
@@ -129,7 +130,7 @@ namespace Evaluator.Variables
         /// </summary>
         public int Length
         {
-            get { return matches.Count; }
+            get { return GetGroupedMatches().Count; }
         }
 
         public IEnumerable<StringMatch> Matches
@@ -140,14 +141,13 @@ namespace Evaluator.Variables
             }
         }
 
-        public override string ToString()
+        private Dictionary<String, Dictionary<String, List<StringMatch>>> GetGroupedMatches()
         {
-
             Dictionary<String, Dictionary<String, List<StringMatch>>> groups = new Dictionary<String, Dictionary<String, List<StringMatch>>>();
 
             foreach (StringMatch match in matches)
             {
-                if(!groups.ContainsKey(match.Text))
+                if (!groups.ContainsKey(match.Text))
                 {
                     groups[match.Text] = new Dictionary<string, List<StringMatch>>();
                 }
@@ -159,6 +159,14 @@ namespace Evaluator.Variables
 
                 groups[match.Text][match.Filename].Add(match);
             }
+            return groups;
+
+        }
+
+        public override string ToString()
+        {
+
+            Dictionary<String, Dictionary<String, List<StringMatch>>> groups = GetGroupedMatches();
 
             StringBuilder sb = new StringBuilder();
             sb.Append("{");
@@ -187,22 +195,9 @@ namespace Evaluator.Variables
                             sb.Append(", ");
                         }
                     }
-
                     sb.Append(">");
                 }
-
             }
-
-            //foreach(StringMatch match in matches)
-            //{
-            //    sb.Append(match.Filename);
-            //    sb.Append("', ");
-            //    sb.Append(match.Line);
-            //    sb.Append(", ");
-            //    sb.Append(match.StartIndex);
-            //    sb.Append(", ");
-            //    sb.Append(match.EndIndex);
-            //}
             sb.Append("}");
             return sb.ToString();
         }
