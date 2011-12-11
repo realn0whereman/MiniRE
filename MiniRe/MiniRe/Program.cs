@@ -15,11 +15,8 @@ namespace MiniRe
                 Console.WriteLine("Invalid usage.  \n\nUsage:  MiniRE.exe <scriptfile>");
                 return;
             }
-            StreamReader reader = new StreamReader(args[0]);
 
-            string contents = reader.ReadToEnd();
-
-            LL1Parser ll1p = new LL1Parser(contents);
+            LL1Parser ll1p = new LL1Parser(args[0]);
 
 
         }

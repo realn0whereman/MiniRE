@@ -47,6 +47,20 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Evaluator\Evaluator.csproj">
+      <Project>{A0DAFECD-376E-4034-85B0-840B212DDA4D}</Project>
+      <Name>Evaluator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParserGenerator\ParserGenerator.csproj">
+      <Project>{341EBE05-B453-438B-80FC-ACBE34095CAA}</Project>
+      <Name>ParserGenerator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Scanner\Scanner.csproj">
+      <Project>{FC44052D-4F04-4C32-807F-D3087740E280}</Project>
+      <Name>Scanner</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
