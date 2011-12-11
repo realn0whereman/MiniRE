@@ -20,10 +20,12 @@ namespace Scanner
 
         private void scanFile()
         {
+            int index = 0;
+
             try
             {
                 String[] srcFile = File.ReadAllLines(this.fileName);
-                for (int index = 0; index < srcFile.Length; index++)
+                for (; index < srcFile.Length; index++)
                 {
                     int stop = 0;
                     String line = srcFile[index];
@@ -34,12 +36,48 @@ namespace Scanner
                         {
                             //ASCII String bounded by single quotes
                             case '"':
-
+                                stop++;
+                                slab.Append("\"");
+                                while(line[stop] != '\"')
+                                {
+                                    slab.Append(line[stop]);
+                                    stop++;
+                                }
+                                slab.Append("\"");
+                                stop++;
+                                tokens.Enqueue(slab.ToString());
+                                slab.Clear();
                                 break;
 
                             //REGEX
                             case '\'':
+                                slab.Append("\'");
+                                stop++;
+                                while(line[stop] != '\'')
+                                {
+                                    slab.Append(line[stop]);
+                                    stop++;
+                                }
+                                slab.Append("\'");
+                                stop++;
+                                tokens.Enqueue(slab.ToString());
+                                slab.Clear();
+                                break;
 
+                            case '(':
+                                tokens.Enqueue("(");
+                                break;
+
+                            case ')':
+                                tokens.Enqueue(")");
+                                break;
+                            
+                            case ';':
+                                tokens.Enqueue(";");
+                                break;
+                            
+                            case '=':
+                                tokens.Enqueue("=");
                                 break;
                         }
                     }
@@ -57,11 +95,13 @@ namespace Scanner
                 System.Console.WriteLine("");
                 System.Console.WriteLine("Stack Trace:");
                 System.Console.WriteLine(Environment.StackTrace);
+                Environment.Exit(1);
             }
             catch (IndexOutOfRangeException ioore)
             {
-                System.Console.WriteLine("Syntax error");
 
+                System.Console.WriteLine("Syntax error on line: " + index + " missed \" or \'.");
+                Environment.Exit(1);
             }
         }
 
