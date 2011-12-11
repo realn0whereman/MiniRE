@@ -324,5 +324,53 @@ namespace EvaluatorTests
             }
             Assert.AreEqual(expected, actual.ToString());
         }
+
+        [TestMethod()]
+        public void RecursiveReplace()
+        {
+            SymbolTable table = new SymbolTable();
+
+            MiniRE miniRe = new MiniRE();
+
+            StatementList sl = new StatementList();
+            miniRe.StatementList = sl;
+
+            Statement statement = new Statement();
+            sl.Statement = statement;
+
+            OtherStatement os = new OtherStatement();
+            os.Mode = OtherStatementMode.RecursiveReplace;
+            statement.OtherStatement = os;
+
+            Regex regex = new Regex();
+            regex.Pattern = "abc";
+            os.Regex = regex;
+
+            Filenames filenames = new Filenames();
+            os.Filenames = filenames;
+
+            Filename source = new Filename();
+            source.Path = "../../../TestFiles/abc.txt";
+            filenames.Filename = source;
+
+            Filename dest = new Filename();
+            dest.Path = "../../../TestFiles/abc_output.txt";
+            filenames.Destimation = dest;
+
+
+            miniRe.Execute(table);
+
+
+            String expected = "bbc  a  bc  a";
+            StringBuilder actual = new StringBuilder();
+            using (FileStream fs = new FileStream("../../../TestFiles/abc_output.txt", FileMode.Open))
+            {
+                using (StreamReader sr = new StreamReader(fs))
+                {
+                    actual.Append(sr.ReadToEnd());
+                }
+            }
+            Assert.AreEqual(expected, actual.ToString());
+        }
     }
 }
