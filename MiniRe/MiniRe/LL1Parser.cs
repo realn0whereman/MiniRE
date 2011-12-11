@@ -30,6 +30,7 @@ namespace MiniRe
             tokens.Push("<MiniRE-program>");
             
             Stack<Node> nodes = new Stack<Node>();
+            Node lastOff = new Node();  
 
             while (tokens.Count != 0)
             {
@@ -62,7 +63,10 @@ namespace MiniRe
                             nodes.Peek().Nodes.Add(newElem);
 
                         if (nodes.Peek().IsFull)
-                            nodes.Pop();
+                        {
+                            lastOff = nodes.Pop();
+                            
+                        }
 
                         nodes.Push(newElem);
                         newrule.Reverse();
@@ -83,7 +87,7 @@ namespace MiniRe
                         nodes.Peek().Nodes.Add(newElem);
 
                         if (nodes.Peek().IsFull)
-                            nodes.Pop();
+                            lastOff = nodes.Pop();
                     }
 
                 }
@@ -171,7 +175,7 @@ namespace MiniRe
                 }
             }
 
-            return null;
+            return lastOff;
         }
 
 
