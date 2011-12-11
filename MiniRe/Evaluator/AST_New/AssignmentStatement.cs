@@ -8,7 +8,7 @@ namespace Evaluator.AST_New
 {
     public class AssignmentStatement : Node
     {
-        string id;
+        StringNode id;
         Exp exp;
         AssignmentStatementType type = AssignmentStatementType.Expression;
 
@@ -19,14 +19,39 @@ namespace Evaluator.AST_New
 
             if (type == AssignmentStatementType.Expression)
             {
-                table[id] = exp.Execute(table);
+                return exp.Execute(table);
             }
             else if (type == AssignmentStatementType.Length)
             {
-                table[id] = ((StringMatchList)exp.Execute(table)).Matches.Count();
+                return ((StringMatchList)exp.Execute(table)).Matches.Count();
             }
             else if (type == AssignmentStatementType.MaxFreqString)
             {
+                StringMatchList matches = (StringMatchList) table[Id.Token];
+                Dictionary<String, int> counts = new Dictionary<string, int>();
+
+                foreach (StringMatch match in matches.Matches)
+                {
+                    if (counts.ContainsKey(match.Text))
+                        counts[match.Text]++;
+                    else
+                        counts[match.Text] = 1;
+                }
+
+                int max = Int16.MinValue;
+                String maxString = "";
+
+                foreach (String key in counts.Keys)
+                {
+                    if (counts[key] > max)
+                    {
+                        max = counts[key];
+                        maxString = key;
+                    }
+                }
+
+                return maxString;
+
 
             }
 
@@ -38,7 +63,7 @@ namespace Evaluator.AST_New
             get { return exp; }
             set { exp = value; }
         }
-        public string Id
+        public StringNode Id
         {
             get { return id; }
             set { id = value; }

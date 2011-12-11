@@ -94,7 +94,7 @@ namespace EvaluatorTests
 
             #region Statement 1
             AssignmentStatement asStmt = new AssignmentStatement();
-            asStmt.Id = "x";
+            asStmt.Id = new StringNode("x");
             statement.AssignmentStatement = asStmt;
 
             Exp exp = new Exp();
@@ -115,7 +115,7 @@ namespace EvaluatorTests
             #region Statement 2
 
             AssignmentStatement as2 = new AssignmentStatement();
-            as2.Id = "y";
+            as2.Id = new StringNode("y");
             as2.Type = AssignmentStatementType.Length;
             s2.AssignmentStatement = as2;
 
@@ -158,7 +158,7 @@ namespace EvaluatorTests
 
             #region Statement 1
             AssignmentStatement asStmt = new AssignmentStatement();
-            asStmt.Id = "x";
+            asStmt.Id = new StringNode("x");
             statement.AssignmentStatement = asStmt;
 
             Exp exp = new Exp();
@@ -179,7 +179,7 @@ namespace EvaluatorTests
             #region Statement 2
 
             AssignmentStatement as2 = new AssignmentStatement();
-            as2.Id = "y";
+            as2.Id = new StringNode("y");
             as2.Type = AssignmentStatementType.Length;
             s2.AssignmentStatement = as2;
 
@@ -251,7 +251,7 @@ namespace EvaluatorTests
 
             #region Statement 1
             AssignmentStatement asStmt = new AssignmentStatement();
-            asStmt.Id = "x";
+            asStmt.Id = new StringNode("x");
             statement.AssignmentStatement = asStmt;
 
             Exp exp = new Exp();
@@ -272,7 +272,7 @@ namespace EvaluatorTests
             #region Statement 2
 
             AssignmentStatement as2 = new AssignmentStatement();
-            as2.Id = "y";
+            as2.Id = new StringNode("y");
             as2.Type = AssignmentStatementType.Length;
             s2.AssignmentStatement = as2;
 
