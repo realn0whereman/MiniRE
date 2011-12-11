@@ -56,6 +56,10 @@
       <Project>{341EBE05-B453-438B-80FC-ACBE34095CAA}</Project>
       <Name>ParserGenerator</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RDParser\RDParser.csproj">
+      <Project>{4B4C4D51-5CA7-47F7-B640-1F2675A86028}</Project>
+      <Name>RDParser</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Scanner\Scanner.csproj">
       <Project>{FC44052D-4F04-4C32-807F-D3087740E280}</Project>
       <Name>Scanner</Name>

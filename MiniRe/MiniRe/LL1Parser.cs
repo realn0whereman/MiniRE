@@ -36,10 +36,22 @@ namespace MiniRe
                 string topElem = tokens.Pop();
                 string nextToken = scanner.peekToken();
 
+                if (nextToken == "$")
+                {
+                    if (topElem == "$")
+                        break;
+                    else
+                        throw new RDParser.SyntaxError("All tokens not popped off stack");
+                }
+
                 if (topElem.Contains('<') && topElem.Contains('>'))
                 {
                     //This is a non-term, we need to look up and replace.  
-                    List<string> newrule = parsetable.getRuleMatchingToken(topElem, nextToken);
+                    List<string> newrule;
+                    if (!isID(nextToken))
+                        newrule = parsetable.getRuleMatchingToken(topElem, "ID");
+                    else
+                        newrule = parsetable.getRuleMatchingToken(topElem, nextToken);
 
                     //Take the existing rule, create its node, add to top elem on stack, pop top elem if full.  
 
@@ -104,10 +116,22 @@ namespace MiniRe
                                 cde.Mode = OtherStatementMode.RecursiveReplace;
                                 break;
                             case "diff":
+                                BinOp op1 = (BinOp)nodes.Peek();
+                                StringNode n1 = new StringNode();
+                                n1.Token = "diff";
+                                op1.Nodes.Add(n1);
                                 break;
                             case "union":
+                                BinOp op2 = (BinOp)nodes.Peek();
+                                StringNode n2 = new StringNode();
+                                n2.Token = "union";
+                                op2.Nodes.Add(n2);
                                 break;
                             case "inters":
+                                BinOp op3 = (BinOp)nodes.Peek();
+                                StringNode n3 = new StringNode();
+                                n3.Token = "union";
+                                op3.Nodes.Add(n3);
                                 break;
                             default:
                                 break;
@@ -136,11 +160,13 @@ namespace MiniRe
                     }
                     else if (topElem == "ID")
                     {
-                        //nodes.Peek().Nodes.Add(
+                        StringNode sn = new StringNode();
+                        sn.Token = nextToken;
+                        nodes.Peek().Nodes.Add(sn);
                     }
                     else
                     {
-                        //throw new RDParser.SyntaxError("Token did not match top of LL(1) Parse Stack.");
+                        throw new RDParser.SyntaxError("Token did not match top of LL(1) Parse Stack.");
                     }
                 }
             }
@@ -178,5 +204,40 @@ namespace MiniRe
 
             return new Node();
         }
+
+        private bool isID(string token)
+        {
+            List<string> badStrs = new List<string>();
+
+            badStrs.Add("begin");
+            badStrs.Add("end");
+            badStrs.Add("maxfreqstring");
+            badStrs.Add("replace");
+            badStrs.Add("with");
+            badStrs.Add("in");
+            badStrs.Add("recursivereplace");
+            badStrs.Add("print");
+            badStrs.Add("find");
+            badStrs.Add("diff");
+            badStrs.Add("union");
+            badStrs.Add("inters");
+
+            if (badStrs.Contains(token))
+                return false;
+
+            foreach (char c in token)
+            {
+                int asciival = (int)c;
+
+                if (asciival > 122)
+                    return false;
+                if (asciival < 48)
+                    return false;
+                if (!(asciival >= 48 && asciival <= 57) && !(asciival >= 65 && asciival <= 90) && !(asciival >= 97 && asciival <= 122) && asciival != 95)
+                    return false;
+            }
+            return true;
+        }
     }
+
 }
