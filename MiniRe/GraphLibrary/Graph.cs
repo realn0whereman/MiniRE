@@ -387,6 +387,7 @@ namespace GraphLibrary
             List<StringMatch> tokens = new List<StringMatch>();
             BaseVertex current = start;
             String currentToken = "";
+            int line = 1;
 
             for (int x = 0; x < input.Length; x++)
             {
@@ -402,13 +403,18 @@ namespace GraphLibrary
                         break;
                     }
                 }
-                if (!foundNext)
+                if (!foundNext || x == input.Length-1)
                 {
                     if (current.Accepting)
                     {
-                        StringMatch match = new StringMatch(currentToken, "", 0, x - currentToken.Length, x);
+                        StringMatch match = new StringMatch(currentToken, "", line);
                         tokens.Add(match);
                         x--;
+                    }
+                    else
+                    {
+                        if (c == '\n')
+                            line++;
                     }
                     //invalid input
                     currentToken = "";

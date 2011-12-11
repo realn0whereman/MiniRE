@@ -21,7 +21,7 @@ namespace Evaluator.Variables
         {
             matches.Add(new StringMatch(match.Text, match.Filename, match.Line, match.StartIndex, match.EndIndex));
         }
-        public void AddMatch(string text, string filename, int line, int startIndex, int endIndex)
+        public void AddMatch(string text, string filename, int line, int startIndex = 0, int endIndex = 0)
         {
             matches.Add(new StringMatch(text, filename, line, startIndex, endIndex));
         }
@@ -113,6 +113,18 @@ namespace Evaluator.Variables
         }
 
         /// <summary>
+        /// Sets the filename for all StringMatches
+        /// </summary>
+        /// <returns></returns>
+        public void SetFilename(String filename)
+        {
+            foreach (StringMatch match in matches)
+            {
+                match.Filename = filename;
+            }
+        }
+
+        /// <summary>
         /// The length of this list
         /// </summary>
         public int Length
@@ -130,25 +142,69 @@ namespace Evaluator.Variables
 
         public override string ToString()
         {
+
+            Dictionary<String, Dictionary<String, List<StringMatch>>> groups = new Dictionary<String, Dictionary<String, List<StringMatch>>>();
+
+            foreach (StringMatch match in matches)
+            {
+                if(!groups.ContainsKey(match.Text))
+                {
+                    groups[match.Text] = new Dictionary<string, List<StringMatch>>();
+                }
+
+                if (!groups[match.Text].ContainsKey(match.Filename))
+                {
+                    groups[match.Text][match.Filename] = new List<StringMatch>();
+                }
+
+                groups[match.Text][match.Filename].Add(match);
+            }
+
             StringBuilder sb = new StringBuilder();
             sb.Append("{");
-            foreach(StringMatch match in matches)
+
+
+            foreach (String text in groups.Keys)
             {
                 sb.Append("\"");
-                sb.Append(match.Text);
+                sb.Append(text);
                 sb.Append("\"");
-                sb.Append(" <'");
-                sb.Append(match.Filename);
-                sb.Append("', ");
-                sb.Append(match.Line);
-                sb.Append(", ");
-                sb.Append(match.StartIndex);
-                sb.Append(", ");
-                sb.Append(match.EndIndex);
-                sb.Append(">");
+
+                foreach (String file in groups[text].Keys)
+                {
+                    List<StringMatch> lines = groups[text][file];
+
+                    sb.Append("<'");
+                    sb.Append(file);
+                    sb.Append("', ");
+
+                    foreach (StringMatch match in lines)
+                    {
+                        sb.Append(match.Line);
+
+                        if(match != lines[lines.Count-1])
+                        {
+                            sb.Append(", ");
+                        }
+                    }
+
+                    sb.Append(">");
+                }
+
             }
+
+            //foreach(StringMatch match in matches)
+            //{
+            //    sb.Append(match.Filename);
+            //    sb.Append("', ");
+            //    sb.Append(match.Line);
+            //    sb.Append(", ");
+            //    sb.Append(match.StartIndex);
+            //    sb.Append(", ");
+            //    sb.Append(match.EndIndex);
+            //}
             sb.Append("}");
-            return base.ToString();
+            return sb.ToString();
         }
 
 

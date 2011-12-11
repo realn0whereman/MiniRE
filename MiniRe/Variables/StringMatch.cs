@@ -15,7 +15,7 @@ namespace Evaluator.Variables
 
         public StringMatch()  {        }
 
-        public StringMatch(string text, string filename, int line, int startIndex, int endIndex)
+        public StringMatch(string text, string filename, int line, int startIndex = 0, int endIndex = 0)
         {
             this.text = text;
             this.filename = filename;

@@ -492,7 +492,20 @@ namespace EvaluatorTests
             miniRe.Execute(table);
             StringMatchList matches = (StringMatchList) table["x"];
 
+
             Assert.AreEqual(9, matches.Length);
+
+            String expected = "{\"mentor\"<'../../../TestFiles/file1.txt', 1>" +
+                "\"filament\"<'../../../TestFiles/file1.txt', 1>" +
+                "\"argument\"<'../../../TestFiles/file1.txt', 1>" +
+                "\"argumentative\"<'../../../TestFiles/file1.txt', 1><'../../../TestFiles/file2.txt', 1>" +
+                "\"Tournament\"<'../../../TestFiles/file1.txt', 1>" +
+                "\"Argument\"<'../../../TestFiles/file2.txt', 1>" +
+                "\"predicament\"<'../../../TestFiles/file2.txt', 1>" +
+                "\"apple\"<'../../../TestFiles/file2.txt', 1>" + 
+            "}";
+
+            Assert.AreEqual(expected, matches.ToString());
 
         }
 

@@ -52,39 +52,5 @@ namespace RDParser
 
             return input;
         }
-        //private static StringMatchList TestInputFile(String input, Graph dfa)
-        //{
-        //    try
-        //    {
-        //        StringBuilder input = new StringBuilder();
-        //        using (FileStream fs = new FileStream(path, FileMode.Open))
-        //        {
-        //            using (StreamReader sr = new StreamReader(fs))
-        //            {
-        //                while (!sr.EndOfStream)
-        //                {
-        //                    input.AppendLine(sr.ReadLine());
-        //                }
-        //            }
-        //        }
-
-        //        input = input.Replace("\n", "");
-        //        input = input.Replace("\r", "");
-
-        //        StringMatchList tokens = new StringMatchList();
-        //        List<StringMatch> tokensFound = dfa.FindTokens(input.ToString());
-        //        foreach (StringMatch match in tokensFound)
-        //        {
-        //            tokens.AddMatch(match);
-        //        }
-
-        //        return tokens;
-        //    }
-        //    catch (FileNotFoundException err)
-        //    {
-        //        Console.Error.WriteLine("Couldn't open input for reading.");
-        //        Environment.Exit(1);
-        //    }
-        //}
     }
 }

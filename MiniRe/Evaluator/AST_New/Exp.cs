@@ -41,21 +41,30 @@ namespace Evaluator.AST_New
                 case "diff":
                     {
                         StringMatchList term1 = (StringMatchList)term.Execute(table);
+                        term1.SetFilename(term.Filename.Path);
+
                         StringMatchList term2 = (StringMatchList)tail.Term.Execute(table);
+                        term2.SetFilename(tail.Term.Filename.Path);
 
                         return term1.Difference(term2);
                     }
                 case "union":
                     {
                         StringMatchList term1 = (StringMatchList)term.Execute(table);
+                        term1.SetFilename(term.Filename.Path);
+
                         StringMatchList term2 = (StringMatchList)tail.Term.Execute(table);
+                        term2.SetFilename(tail.Term.Filename.Path);
 
                         return term1.Union(term2);
                     }
                 case "inters":
                     {
                         StringMatchList term1 = (StringMatchList)term.Execute(table);
+                        term1.SetFilename(term.Filename.Path);
+
                         StringMatchList term2 = (StringMatchList)tail.Term.Execute(table);
+                        term2.SetFilename(tail.Term.Filename.Path);
 
                         return term1.Intersect(term2);
                     }

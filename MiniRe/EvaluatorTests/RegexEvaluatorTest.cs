@@ -73,7 +73,7 @@ namespace EvaluatorTests
         public void RegexEvalTest1()
         {
             string pattern = "ste(ph|v)en";
-            string text = "stephen steve steven seven stepvhen sharks LOLOLOL";
+            string text = "stephen steve \n steven seven stepvhen sharks LOLOLOL";
 
             StringMatchList list = RegexEvaluator.Eval(pattern, text);
             string actual = "";

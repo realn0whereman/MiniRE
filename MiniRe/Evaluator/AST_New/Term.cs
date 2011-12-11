@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using RDParser;
+using Evaluator.Variables;
 
 namespace Evaluator.AST_New
 {
@@ -19,14 +20,13 @@ namespace Evaluator.AST_New
             {
                 using (StreamReader sr = new StreamReader(fs))
                 {
-                    while (!sr.EndOfStream)
-                    {
-                        filetext.AppendLine(sr.ReadLine());
-                    }
+                    filetext.Append(sr.ReadToEnd());
                 }
             }
 
-            return RegexEvaluator.Eval(regex.Pattern, filetext.ToString());
+            StringMatchList matches = RegexEvaluator.Eval(regex.Pattern, filetext.ToString());
+            matches.SetFilename(filename.Path);
+            return matches;
 
         }
 
