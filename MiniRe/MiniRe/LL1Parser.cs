@@ -49,11 +49,17 @@ namespace MiniRe
                 {
                     //This is a non-term, we need to look up and replace.  
                     List<string> newrule;
-                    if (!isID(nextToken))
-                        newrule = parsetable.getRuleMatchingToken(topElem, "ID");
-                    else
-                        newrule = parsetable.getRuleMatchingToken(topElem, nextToken);
-
+                    try
+                    {
+                        if (!isID(nextToken))
+                            newrule = parsetable.getRuleMatchingToken(topElem, "ID");
+                        else
+                            newrule = parsetable.getRuleMatchingToken(topElem, nextToken);
+                    }
+                    catch (KeyNotFoundException e)
+                    {
+                        throw new RDParser.SyntaxError("Invalid token in position.");
+                    }
                     //Take the existing rule, create its node, add to top elem on stack, pop top elem if full.  
 
                     Node newElem = GetNodeFromRuleName(topElem);

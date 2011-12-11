@@ -9,6 +9,7 @@ namespace ParserGenerator
     {
         Dictionary<String, Dictionary<String, List<String>>> parseTable;
         public ParserGenerator() {
+            parseTable = new Dictionary<string, Dictionary<string, List<string>>>();
             constructParseTable();
         }
 

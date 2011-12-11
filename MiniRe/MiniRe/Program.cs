@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-
+using Evaluator.AST_New;
 using Scanner;
 
 namespace MiniRe
@@ -19,6 +19,7 @@ namespace MiniRe
             }
 
             LL1Parser ll1p = new LL1Parser(args[0]);
+            Node astRoot = ll1p.doParse();
 
 
         }

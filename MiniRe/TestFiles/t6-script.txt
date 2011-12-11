@@ -1,0 +1,9 @@
+begin
+match_ght = find '([A-Za-z])*ght([A-Za-z])*' in "t6-input.txt";
+cnt_match = #match_ght;
+print(cnt_match);
+replace 'ght' with "qa" in "t6-input.txt" >! "t6-result.txt";
+match_qa = find '([A-Za-z])*qa([A-Za-z])*' in "t6-result.txt";
+cnt_match = #match_qa;
+print(cnt_match);
+end
