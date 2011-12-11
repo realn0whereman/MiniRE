@@ -91,6 +91,28 @@ namespace Scanner
                                 tokens.Enqueue(")");
                                 break;
                             
+                            case '#':
+                                stop++;
+                                tokens.Enqueue("#");
+                                break;
+
+                            case '>':
+                                if ((stop + 1) < line.Length && line[stop + 1] == '!')
+                                {
+                                    tokens.Enqueue(">!");
+                                    stop += 2;
+                                }
+                                else
+                                {
+                                    throw new SyntaxError("Error '>' without the '!' symbol. Line: " + index + " column: " + stop);
+                                }
+                                break;
+
+                            case ',':
+                                stop++;
+                                tokens.Enqueue(",");
+                                break;
+
                             case ';':
                                 stop++;
                                 tokens.Enqueue(";");
@@ -118,7 +140,7 @@ namespace Scanner
                                 break;
 
                             default:
-                                int count = 9;
+                                int count = 10;
                                 if(isaLetter(line[stop]))
                                 {
                                     slab.Append(line[stop]);
@@ -132,7 +154,7 @@ namespace Scanner
                                     }
                                     if (count == 0)
                                     {
-                                        throw new SyntaxError("Identifier to long. Line number: " + (index + 1) + " Word starts with: " + slab);
+                                        throw new SyntaxError("Identifier to long. Line number: " + (index + 1) + " column: " + stop +  " Word starts with: " + slab);
                                     }
                                     else
                                     {
