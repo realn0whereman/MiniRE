@@ -36,9 +36,43 @@ namespace Evaluator.AST_New
                     Replace();
                     break;
 
+                case OtherStatementMode.RecursiveReplace:
+                    RR();
+                    break;
+
             }
 
             return null;
+        }
+
+        private void RR()
+        {
+            StringBuilder filetext = new StringBuilder();
+            using (FileStream fs = new FileStream(filenames.Filename.Path, FileMode.Open))
+            {
+                using (StreamReader sr = new StreamReader(fs))
+                {
+                    filetext.Append(sr.ReadToEnd());
+                }
+            }
+
+            StringMatchList matches = RegexEvaluator.Eval(Regex.Pattern, filetext.ToString());
+            String output = filetext.ToString();
+
+            while (matches.Length > 0)
+            {
+                output = RegexEvaluator.Replace(regex.Pattern, output, replaceText);
+                matches = RegexEvaluator.Eval(Regex.Pattern, output);
+            }
+           
+
+            using (FileStream fs = new FileStream(filenames.Destimation.Path, FileMode.Create))
+            {
+                using (StreamWriter sw = new StreamWriter(fs))
+                {
+                    sw.Write(output);
+                }
+            }
         }
 
         private void Replace()
@@ -52,7 +86,15 @@ namespace Evaluator.AST_New
                 }
             }
 
-            StringMatchList matches = RegexEvaluator.Eval(regex.Pattern, replaceText);
+            String output = RegexEvaluator.Replace(regex.Pattern, filetext.ToString(), replaceText);
+
+            using (FileStream fs = new FileStream(filenames.Destimation.Path, FileMode.Create))
+            {
+                using (StreamWriter sw = new StreamWriter(fs))
+                {
+                    sw.Write(output);
+                }
+            }
         }
 
         public Regex Regex

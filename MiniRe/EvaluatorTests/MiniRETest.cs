@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Evaluator;
 using System.IO;
+using System.Text;
 
 namespace EvaluatorTests
 {
@@ -293,23 +294,83 @@ namespace EvaluatorTests
             s3.OtherStatement = os;
 
             Regex regex3 = new Regex();
+            regex3.Pattern = "(a|A)";
             os.Regex = regex3;
 
             Filenames filenames = new Filenames();
             os.Filenames = filenames;
 
             Filename filename2 = new Filename();
-            filename2.Path = "../../../file2.txt";
+            filename2.Path = "../../../TestFiles/file2.txt";
             filenames.Filename = filename2;
 
             Filename destimation = new Filename();
-            destimation.Path = "../../../file3.txt";
+            destimation.Path = "../../../TestFiles/file3.txt";
             filenames.Destimation = destimation;
 
 
             #endregion
 
             miniRe.Execute(table);
+
+            String expected = "brgument brgumentbtive predicbment mentoring bpple";
+            StringBuilder actual = new StringBuilder();
+            using(FileStream fs = new FileStream("../../../TestFiles/file3.txt", FileMode.Open))
+            {
+                using(StreamReader sr = new StreamReader(fs))
+                {
+                    actual.Append(sr.ReadToEnd());
+                }
+            }
+            Assert.AreEqual(expected, actual.ToString());
+        }
+
+        [TestMethod()]
+        public void RecursiveReplace()
+        {
+            SymbolTable table = new SymbolTable();
+
+            MiniRE miniRe = new MiniRE();
+
+            StatementList sl = new StatementList();
+            miniRe.StatementList = sl;
+
+            Statement statement = new Statement();
+            sl.Statement = statement;
+
+            OtherStatement os = new OtherStatement();
+            os.Mode = OtherStatementMode.RecursiveReplace;
+            statement.OtherStatement = os;
+
+            Regex regex = new Regex();
+            regex.Pattern = "abc";
+            os.Regex = regex;
+
+            Filenames filenames = new Filenames();
+            os.Filenames = filenames;
+
+            Filename source = new Filename();
+            source.Path = "../../../TestFiles/abc.txt";
+            filenames.Filename = source;
+
+            Filename dest = new Filename();
+            dest.Path = "../../../TestFiles/abc_output.txt";
+            filenames.Destimation = dest;
+
+
+            miniRe.Execute(table);
+
+
+            String expected = "bbc  a  bc  a";
+            StringBuilder actual = new StringBuilder();
+            using (FileStream fs = new FileStream("../../../TestFiles/abc_output.txt", FileMode.Open))
+            {
+                using (StreamReader sr = new StreamReader(fs))
+                {
+                    actual.Append(sr.ReadToEnd());
+                }
+            }
+            Assert.AreEqual(expected, actual.ToString());
         }
     }
 }
