@@ -32,5 +32,10 @@ namespace Evaluator.AST_New
                 return true;
             }
         }
+
+        public override string ToString()
+        {
+            return token;
+        }
     }
 }

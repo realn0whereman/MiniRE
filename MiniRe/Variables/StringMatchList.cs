@@ -26,6 +26,25 @@ namespace Evaluator.Variables
             matches.Add(new StringMatch(text, filename, line, startIndex, endIndex));
         }
 
+        public void RemoveString(String s)
+        {
+            bool remove = false;
+            StringMatch current = null;
+            foreach (StringMatch match in matches)
+            {
+                current = match;
+                if (ContainsString(s))
+                {
+                    remove = true;
+                    break;
+                }
+            }
+
+            if (remove)
+                matches.Remove(current);
+
+        }
+
         public StringMatchList Intersect(StringMatchList other)
         {
             StringMatchList list = new StringMatchList();
@@ -42,6 +61,55 @@ namespace Evaluator.Variables
             }
 
             return list;
+        }
+        public StringMatchList Union(StringMatchList other)
+        {
+            StringMatchList union = new StringMatchList();
+
+            foreach (StringMatch match in matches)
+            {
+                union.AddMatch(match);
+            }
+
+            foreach (StringMatch match in other.Matches)
+            {
+                union.AddMatch(match);
+            }
+
+            return union;
+        }
+        public StringMatchList Difference(StringMatchList other)
+        {
+            StringMatchList union = new StringMatchList();
+
+            foreach (StringMatch match in matches)
+            {
+                union.AddMatch(match);
+            }
+
+            foreach (StringMatch match in other.Matches)
+            {
+                if (union.ContainsString(match))
+                    union.RemoveString(match.Text);
+            }
+
+            return union;
+
+        }
+
+        public bool ContainsString(StringMatch match)
+        {
+            return ContainsString(match.Text);
+        }
+        public bool ContainsString(String s)
+        {
+            foreach (StringMatch match in matches)
+            {
+                if (match.Text == s)
+                    return true;
+            }
+
+            return false;
         }
 
         /// <summary>

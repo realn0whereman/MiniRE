@@ -4,6 +4,7 @@ using System;
 using Evaluator;
 using System.IO;
 using System.Text;
+using Evaluator.Variables;
 
 namespace EvaluatorTests
 {
@@ -418,6 +419,221 @@ namespace EvaluatorTests
 
             miniRe.Execute(table);
             Assert.AreEqual("hey", table["y"]);            
+        }
+
+
+        [TestMethod()]
+        public void Union()
+        {
+            //begin
+            //x = (find 'a(b|c)' in abc.txt) union (find 'bc in abc.txt)
+            //end
+
+            SymbolTable table = new SymbolTable();
+
+            MiniRE miniRe = new MiniRE();
+
+            StatementList sl = new StatementList();
+            miniRe.StatementList = sl;
+
+            Statement statement = new Statement();
+            statement.Id = new StringNode("x");
+            sl.Statement = statement;
+
+            AssignmentStatement as1 = new AssignmentStatement();
+            statement.AssignmentStatement = as1;
+
+            Exp exp = new Exp();
+            as1.Exp = exp;
+
+            #region First find
+
+            Term t1 = new Term();
+            exp.Term = t1;
+
+            Regex r1 = new Regex();
+            r1.Pattern = "([a-zA-Z])*ment([a-zA-Z])*";
+            t1.Regex = r1;
+
+            Filename file1 = new Filename();
+            file1.Path = "../../../TestFiles/file1.txt";
+            t1.Filename = file1; 
+
+            #endregion
+
+            ExpTail expTail = new ExpTail();
+            exp.Tail = expTail;
+
+            BinOp bop = new BinOp();
+            expTail.Binop = bop;
+
+            StringNode operation = new StringNode("union");
+            bop.Operation = operation;
+
+
+            #region Second find
+
+            Term t2 = new Term();
+            expTail.Term = t2;
+
+            ExpTail expTail2 = new ExpTail();
+            expTail.Tail = expTail2;
+
+            Regex r2 = new Regex();
+            r2.Pattern = "([a-zA-Z])*(a|A)([a-zA-Z])*";
+            t2.Regex = r2;
+
+            Filename file2 = new Filename();
+            file2.Path = "../../../TestFiles/file2.txt";
+            t2.Filename = file2;
+
+            #endregion
+
+            miniRe.Execute(table);
+            StringMatchList matches = (StringMatchList) table["x"];
+
+            Assert.AreEqual(9, matches.Length);
+
+        }
+
+        [TestMethod()]
+        public void Intersect()
+        {
+            SymbolTable table = new SymbolTable();
+
+            MiniRE miniRe = new MiniRE();
+
+            StatementList sl = new StatementList();
+            miniRe.StatementList = sl;
+
+            Statement statement = new Statement();
+            statement.Id = new StringNode("x");
+            sl.Statement = statement;
+
+            AssignmentStatement as1 = new AssignmentStatement();
+            statement.AssignmentStatement = as1;
+
+            Exp exp = new Exp();
+            as1.Exp = exp;
+
+            #region First find
+
+            Term t1 = new Term();
+            exp.Term = t1;
+
+            Regex r1 = new Regex();
+            r1.Pattern = "([a-zA-Z])*ment([a-zA-Z])*";
+            t1.Regex = r1;
+
+            Filename file1 = new Filename();
+            file1.Path = "../../../TestFiles/file1.txt";
+            t1.Filename = file1;
+
+            #endregion
+
+            ExpTail expTail = new ExpTail();
+            exp.Tail = expTail;
+
+            BinOp bop = new BinOp();
+            expTail.Binop = bop;
+
+            StringNode operation = new StringNode("inters");
+            bop.Operation = operation;
+
+
+            #region Second find
+
+            Term t2 = new Term();
+            expTail.Term = t2;
+
+            ExpTail expTail2 = new ExpTail();
+            expTail.Tail = expTail2;
+
+            Regex r2 = new Regex();
+            r2.Pattern = "([a-zA-Z])*(a|A)([a-zA-Z])*";
+            t2.Regex = r2;
+
+            Filename file2 = new Filename();
+            file2.Path = "../../../TestFiles/file2.txt";
+            t2.Filename = file2;
+
+            #endregion
+
+            miniRe.Execute(table);
+            StringMatchList matches = (StringMatchList)table["x"];
+
+            Assert.AreEqual(1, matches.Length);
+
+        }
+
+        [TestMethod()]
+        public void Difference()
+        {
+            SymbolTable table = new SymbolTable();
+
+            MiniRE miniRe = new MiniRE();
+
+            StatementList sl = new StatementList();
+            miniRe.StatementList = sl;
+
+            Statement statement = new Statement();
+            statement.Id = new StringNode("x");
+            sl.Statement = statement;
+
+            AssignmentStatement as1 = new AssignmentStatement();
+            statement.AssignmentStatement = as1;
+
+            Exp exp = new Exp();
+            as1.Exp = exp;
+
+            #region First find
+
+            Term t1 = new Term();
+            exp.Term = t1;
+
+            Regex r1 = new Regex();
+            r1.Pattern = "([a-zA-Z])*ment([a-zA-Z])*";
+            t1.Regex = r1;
+
+            Filename file1 = new Filename();
+            file1.Path = "../../../TestFiles/file1.txt";
+            t1.Filename = file1;
+
+            #endregion
+
+            ExpTail expTail = new ExpTail();
+            exp.Tail = expTail;
+
+            BinOp bop = new BinOp();
+            expTail.Binop = bop;
+
+            StringNode operation = new StringNode("diff");
+            bop.Operation = operation;
+
+
+            #region Second find
+
+            Term t2 = new Term();
+            expTail.Term = t2;
+
+            ExpTail expTail2 = new ExpTail();
+            expTail.Tail = expTail2;
+
+            Regex r2 = new Regex();
+            r2.Pattern = "([a-zA-Z])*(a|A)([a-zA-Z])*";
+            t2.Regex = r2;
+
+            Filename file2 = new Filename();
+            file2.Path = "../../../TestFiles/file2.txt";
+            t2.Filename = file2;
+
+            #endregion
+
+            miniRe.Execute(table);
+            StringMatchList matches = (StringMatchList)table["x"];
+
+            Assert.AreEqual(4, matches.Length);
+
         }
     }
 }
