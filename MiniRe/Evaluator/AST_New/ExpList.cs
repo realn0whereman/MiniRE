@@ -35,5 +35,13 @@ namespace Evaluator.AST_New
             get { return exp; }
             set { exp = value; }
         }
+
+        public override bool IsFull
+        {
+            get
+            {
+                return Nodes.Count == 2;
+            }
+        }
     }
 }

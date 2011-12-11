@@ -122,6 +122,34 @@ namespace Evaluator.AST_New
             get { return filenames; }
             set { filenames = value; }
         }
+
+        public override bool IsFull
+        {
+            get
+            {
+                int count = 0;
+                if (Nodes.Count == 0)
+                    return false;
+
+                StringNode info = (StringNode)Nodes[0];
+                int expected;
+                if (info.Token == "print")
+                    expected = 1;
+                else
+                    expected = 3;
+
+
+                foreach (Node n in Nodes)
+                {
+                    if (!(n is StringNode))
+                        count++;
+                }
+                if (count == expected)
+                    return true;
+                else
+                    return false;
+            }
+        }
     }
 
     public enum OtherStatementMode

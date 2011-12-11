@@ -48,6 +48,33 @@ namespace Evaluator.AST_New
             get { return type; }
             set { type = value; }
         }
+
+        public override bool IsFull
+        {
+            get
+            {
+                if (this.Nodes.Count == 0)
+                    return false;
+                else
+                {
+                    foreach (Node n in Nodes)
+                    {
+                        if (n is Exp)
+                            return true;
+                        else if (n is StringNode)
+                        {
+                            StringNode x = (StringNode)n;
+                            if (x.Token == "maxfreqstring")
+                                if(Nodes.Count == 2)
+                                    return true;
+                                else
+                                    return false;
+                        }
+                    }
+                }
+                return false;
+            }
+        }
     }
 
     public enum AssignmentStatementType

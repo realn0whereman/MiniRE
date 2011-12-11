@@ -21,7 +21,7 @@ namespace Evaluator.AST_New
             return null;
         }
 
-        public bool IsFull
+        public virtual bool IsFull
         {
             get
             {

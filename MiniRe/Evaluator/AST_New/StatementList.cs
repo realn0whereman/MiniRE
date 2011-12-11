@@ -34,5 +34,22 @@ namespace Evaluator.AST_New
             get { return tail; }
             set { tail = value; }
         }
+
+        public override bool IsFull
+        {
+            get
+            {
+                int count = 0;
+                foreach (Node n in Nodes)
+                {
+                    if (!(n is StringNode))
+                        count++;
+                }
+                if (count == 2)
+                    return true;
+                else
+                    return false;
+            }
+        }
     }
 }

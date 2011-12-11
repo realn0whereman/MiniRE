@@ -14,5 +14,13 @@ namespace Evaluator.AST_New
             get { return path; }
             set { path = value; }
         }
+
+        public override bool IsFull
+        {
+            get
+            {
+                return Nodes.Count == 1;
+            }
+        }
     }
 }

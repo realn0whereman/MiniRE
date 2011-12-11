@@ -22,5 +22,18 @@ namespace Evaluator.AST_New
 
             return null;
         }
+
+        public override bool IsFull
+        {
+            get
+            {
+                foreach (Node n in Nodes)
+                {
+                    if (!(n is StringNode))
+                        return true;
+                }
+                return false;
+            }
+        }
     }
 }

@@ -22,5 +22,13 @@ namespace Evaluator.AST_New
             get { return filename; }
             set { filename = value; }
         }
+
+        public override bool IsFull
+        {
+            get
+            {
+                return Nodes.Count == 2;
+            }
+        }
     }
 }

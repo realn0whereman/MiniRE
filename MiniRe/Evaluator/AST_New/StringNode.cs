@@ -15,6 +15,12 @@ namespace Evaluator.AST_New
             set { token = value; }
         }
 
-
+        public override bool IsFull
+        {
+            get
+            {
+                return true;
+            }
+        }
     }
 }

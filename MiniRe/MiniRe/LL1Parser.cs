@@ -63,6 +63,16 @@ namespace MiniRe
                             }
                         }
                     }
+                    else
+                    {
+                        StringNode sn = new StringNode();
+                        sn.Token = "%";
+                        newElem.Nodes.Add(sn);
+                        nodes.Peek().Nodes.Add(newElem);
+
+                        if (nodes.Peek().IsFull)
+                            nodes.Pop();
+                    }
 
                 }
                 else
