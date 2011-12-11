@@ -52,7 +52,7 @@ namespace MiniRe
                         if (nodes.Peek().IsFull)
                             nodes.Pop();
 
-                        
+                        nodes.Push(newElem);
                         newrule.Reverse();
 
                         if (newrule.Count > 0 && newrule[0] != "%")
@@ -71,7 +71,62 @@ namespace MiniRe
                     //Is a terminal; must match top of stack, possibly do stuff with AST depending on token.  
                     if (topElem == nextToken)
                     {
-                        //Here's where we are going to do AST stuff.  
+                        switch (nextToken)
+                        {
+                            case "maxfreqstring":
+                                AssignmentStatement xyz = (AssignmentStatement)nodes.Peek();
+                                xyz.Type = AssignmentStatementType.MaxFreqString;
+                                break;
+                            case "#":
+                                AssignmentStatement xyza = (AssignmentStatement)nodes.Peek();
+                                xyza.Type = AssignmentStatementType.Length;
+                                break;
+                            case "replace":
+                                OtherStatement abc = (OtherStatement)nodes.Peek();
+                                abc.Mode = OtherStatementMode.Replace;
+                                break;
+                            case "print":
+                                OtherStatement bcd = (OtherStatement)nodes.Peek();
+                                bcd.Mode = OtherStatementMode.Print;
+                                break;
+                            case "recursivereplace":
+                                OtherStatement cde = (OtherStatement)nodes.Peek();
+                                cde.Mode = OtherStatementMode.RecursiveReplace;
+                                break;
+                            case "diff":
+                                break;
+                            case "union":
+                                break;
+                            case "inters":
+                                break;
+                            default:
+                                break;
+                        }
+                        
+                    }
+                    else if (topElem == "REGEX" && nextToken[0] == '\'' && nextToken[nextToken.Length - 1] == '\'')
+                    {
+                        Regex re = new Regex();
+                        re.Pattern = nextToken.Substring(1, nextToken.Length - 2);
+                        nodes.Peek().Nodes.Add(re);
+                    }
+                    else if (topElem == "ASCII-STR" && nextToken[0] == '"' && nextToken[nextToken.Length - 1] == '"')
+                    {
+                        Node top = nodes.Peek();
+                        if (top is OtherStatement)
+                        {
+                            OtherStatement nd = (OtherStatement)top;
+                            nd.ReplaceText = nextToken;
+                        }
+                        else if (top is Filename)
+                        {
+                            Filename fn = (Filename)top;
+                            fn.Path = nextToken.Substring(1, nextToken.Length-2);
+                        }
+                    }
+                    else if (topElem == "ID")
+                    {
+                        //nodes.Peek().Nodes.Add(
                     }
                     else
                     {
