@@ -22,10 +22,18 @@ namespace ParserGenerator
             parseTable["<MiniRE-program>"]["begin"].Add("begin");
             parseTable["<MiniRE-program>"]["begin"].Add("<statement-list>");
             parseTable["<MiniRE-program>"]["begin"].Add("end");
+
+            parseTable.Add("<MiniRE-program>",
+                new Dictionary<String, List<String>>()
+            );
+            parseTable["<MiniRE-program>"].Add("begin", new List<String>());
+            parseTable["<MiniRE-program>"]["begin"].Add("begin");
+            parseTable["<MiniRE-program>"]["begin"].Add("<statement-list>");
+            parseTable["<MiniRE-program>"]["begin"].Add("end");
         }
 
-        public String getRuleMatchingToken(String currentState, String token) {
-            return "";
+        public List<String> getRuleMatchingToken(String currentState, String token) {
+            return new List<String> { ""};
         }
 
         /*public void parseGrammar(){
