@@ -51,7 +51,7 @@ namespace MiniRe
                     List<string> newrule;
                     try
                     {
-                        if (!isID(nextToken))
+                        if (isID(nextToken))
                             newrule = parsetable.getRuleMatchingToken(topElem, "ID");
                         else
                             newrule = parsetable.getRuleMatchingToken(topElem, nextToken);
@@ -68,10 +68,9 @@ namespace MiniRe
                         if (nodes.Count != 0)
                             nodes.Peek().Nodes.Add(newElem);
 
-                        if (nodes.Peek().IsFull)
+                        if (nodes.Count != 0 && nodes.Peek().IsFull)
                         {
                             lastOff = nodes.Pop();
-                            
                         }
 
                         nodes.Push(newElem);
@@ -140,13 +139,12 @@ namespace MiniRe
                             case "inters":
                                 BinOp op3 = (BinOp)nodes.Peek();
                                 StringNode n3 = new StringNode();
-                                n3.Token = "union";
+                                n3.Token = "inters";
                                 op3.Nodes.Add(n3);
                                 break;
                             default:
                                 break;
                         }
-                        
                     }
                     else if (topElem == "REGEX" && nextToken[0] == '\'' && nextToken[nextToken.Length - 1] == '\'')
                     {
