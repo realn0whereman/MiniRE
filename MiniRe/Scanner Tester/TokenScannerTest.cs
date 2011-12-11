@@ -86,6 +86,7 @@ namespace Scanner_Tester
         }
 
         [TestMethod()]
+        [DeploymentItem("Scanner.dll")]
         public void scanTestWorkToLong()
         {
             try
@@ -100,6 +101,8 @@ namespace Scanner_Tester
             
         }
 
+        [TestMethod()]
+        [DeploymentItem("Scanner.dll")]
         public void scanTestFailBadSymbol()
         {
             try
@@ -113,6 +116,8 @@ namespace Scanner_Tester
             }
         }
 
+        [TestMethod()]
+        [DeploymentItem("Scanner.dll")]
         public void scanBreakUp()
         {
             TokenScanner scanner = new TokenScanner("ScanTestBreakUp.txt");

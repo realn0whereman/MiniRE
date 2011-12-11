@@ -9,6 +9,8 @@ namespace Evaluator.AST_New
     {
         List<Node> nodes;
 
+
+
         public Node()
         {
             nodes = new List<Node>();

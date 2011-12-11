@@ -44,18 +44,23 @@ namespace MiniRe
                     //Take the existing rule, create its node, add to top elem on stack, pop top elem if full.  
 
                     Node newElem = GetNodeFromRuleName(topElem);
-                    if (nodes.Count != 0)
+                    if (!(newrule.Count == 0 && newrule[0] == "%"))
                     {
-                        nodes.Peek().Nodes.Add(newElem);
-                    }
+                        if (nodes.Count != 0)
+                            nodes.Peek().Nodes.Add(newElem);
 
-                    newrule.Reverse();
+                        if (nodes.Peek().IsFull)
+                            nodes.Pop();
 
-                    if (newrule.Count > 0 && newrule[0] != "%")
-                    {
-                        foreach (string s in newrule)
+                        
+                        newrule.Reverse();
+
+                        if (newrule.Count > 0 && newrule[0] != "%")
                         {
-                            tokens.Push(s);
+                            foreach (string s in newrule)
+                            {
+                                tokens.Push(s);
+                            }
                         }
                     }
 
