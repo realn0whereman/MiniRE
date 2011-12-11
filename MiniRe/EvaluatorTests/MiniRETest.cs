@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Evaluator;
 using System.IO;
+using System.Text;
 
 namespace EvaluatorTests
 {
@@ -293,23 +294,35 @@ namespace EvaluatorTests
             s3.OtherStatement = os;
 
             Regex regex3 = new Regex();
+            regex3.Pattern = "(a|A)";
             os.Regex = regex3;
 
             Filenames filenames = new Filenames();
             os.Filenames = filenames;
 
             Filename filename2 = new Filename();
-            filename2.Path = "../../../file2.txt";
+            filename2.Path = "../../../TestFiles/file2.txt";
             filenames.Filename = filename2;
 
             Filename destimation = new Filename();
-            destimation.Path = "../../../file3.txt";
+            destimation.Path = "../../../TestFiles/file3.txt";
             filenames.Destimation = destimation;
 
 
             #endregion
 
             miniRe.Execute(table);
+
+            String expected = "brgument brgumentbtive predicbment mentoring bpple";
+            StringBuilder actual = new StringBuilder();
+            using(FileStream fs = new FileStream("../../../TestFiles/file3.txt", FileMode.Open))
+            {
+                using(StreamReader sr = new StreamReader(fs))
+                {
+                    actual.Append(sr.ReadToEnd());
+                }
+            }
+            Assert.AreEqual(expected, actual.ToString());
         }
     }
 }

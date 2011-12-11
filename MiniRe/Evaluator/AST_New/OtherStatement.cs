@@ -52,7 +52,15 @@ namespace Evaluator.AST_New
                 }
             }
 
-            StringMatchList matches = RegexEvaluator.Eval(regex.Pattern, replaceText);
+            String output = RegexEvaluator.Replace(regex.Pattern, filetext.ToString(), replaceText);
+
+            using (FileStream fs = new FileStream(filenames.Destimation.Path, FileMode.Create))
+            {
+                using (StreamWriter sw = new StreamWriter(fs))
+                {
+                    sw.Write(output);
+                }
+            }
         }
 
         public Regex Regex
