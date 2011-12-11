@@ -53,6 +53,10 @@ namespace MiniRe
                     {
                         if (isID(nextToken))
                             newrule = parsetable.getRuleMatchingToken(topElem, "ID");
+                        else if(isREGEX(nextToken))
+                            newrule = parsetable.getRuleMatchingToken(topElem, "REGEX");
+                        else if(isASCIISTR(nextToken))
+                            newrule = parsetable.getRuleMatchingToken(topElem, "ASCII-STR");
                         else
                             newrule = parsetable.getRuleMatchingToken(topElem, nextToken);
                     }
@@ -244,6 +248,22 @@ namespace MiniRe
                 if (!(asciival >= 48 && asciival <= 57) && !(asciival >= 65 && asciival <= 90) && !(asciival >= 97 && asciival <= 122) && asciival != 95)
                     return false;
             }
+            return true;
+        }
+
+        private bool isASCIISTR(string token)
+        {
+            if (!(token[0] == '"') || !(token[token.Length - 1] == '"'))
+                return false;
+
+            return true;
+        }
+
+        private bool isREGEX(string token)
+        {
+            if (!(token[0] == '\'') || !(token[token.Length - 1] == '\''))
+                return false;
+
             return true;
         }
     }
