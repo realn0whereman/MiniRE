@@ -6,23 +6,17 @@ using System.Text;
 namespace Evaluator.AST_New
 {
     public class Statement : Node
-    {
-        AssignmentStatement assignmentStatement;
-        OtherStatement otherStatement;
-        StringNode id;
-
-        
-
+    {   
         public override object Execute(SymbolTable table)
         {
             base.Execute(table);
-            if (assignmentStatement != null)
+            if (AssignmentStatement != null)
             {
-                table[Id.Token] = assignmentStatement.Execute(table);
+                table[Id.Token] = AssignmentStatement.Execute(table);
             }
-            else if (otherStatement != null)
+            else if (OtherStatement != null)
             {
-                otherStatement.Execute(table);
+                OtherStatement.Execute(table);
             }
 
             return null;
@@ -30,18 +24,57 @@ namespace Evaluator.AST_New
 
         public AssignmentStatement AssignmentStatement
         {
-            get { return assignmentStatement; }
-            set { assignmentStatement = value; }
+            get
+            {
+                if (Nodes.Count >= 2)
+                {
+                    return (AssignmentStatement)Nodes[1];
+                }
+                else
+                    return null;
+            }
+            set
+            {
+                if (Nodes.Count < 2)
+                    Nodes.Add(null);
+                Nodes[1] = value;
+            }
         }
         public OtherStatement OtherStatement
         {
-            get { return otherStatement; }
-            set { otherStatement = value; }
+            get
+            {
+                if (Nodes.Count >= 1)
+                {
+                    return (OtherStatement)Nodes[0];
+                }
+                else
+                    return null;
+            }
+            set
+            {
+                if (Nodes.Count < 1)
+                    Nodes.Add(null);
+                Nodes[0] = value;
+            }
         }
         public StringNode Id
         {
-            get { return id; }
-            set { id = value; }
+            get
+            {
+                if (Nodes.Count >= 1)
+                {
+                    return (StringNode)Nodes[0];
+                }
+                else
+                    return null;
+            }
+            set
+            {
+                if (Nodes.Count < 1)
+                    Nodes.Add(null);
+                Nodes[0] = value;
+            }
         }
         
     }

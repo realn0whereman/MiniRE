@@ -7,20 +7,41 @@ namespace Evaluator.AST_New
 {
     public class Filenames : Node
     {
-        Filename filename;
-        Filename destimation;
-
-
-
         public Filename Destimation
         {
-            get { return destimation; }
-            set { destimation = value; }
+            get
+            {
+                if (Nodes.Count >= 2)
+                {
+                    return (Filename)Nodes[1];
+                }
+                else
+                    return null;
+            }
+            set
+            {
+                if (Nodes.Count < 2)
+                    Nodes.Add(null);
+                Nodes[1] = value;
+            }
         }
         public Filename Filename
         {
-            get { return filename; }
-            set { filename = value; }
+            get
+            {
+                if (Nodes.Count >= 1)
+                {
+                    return (Filename)Nodes[0];
+                }
+                else
+                    return null;
+            }
+            set
+            {
+                if (Nodes.Count < 1)
+                    Nodes.Add(null);
+                Nodes[0] = value;
+            }
         }
 
         public override bool IsFull

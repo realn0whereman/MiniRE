@@ -7,18 +7,30 @@ namespace Evaluator.AST_New
 {
     public class MiniRE : Node
     {
-        StatementList statementList;
 
         public StatementList StatementList
         {
-            get { return statementList; }
-            set { statementList = value; }
+            get
+            {
+                if (Nodes.Count >= 1)
+                {
+                    return (StatementList)Nodes[0];
+                }
+                else
+                    return null;
+            }
+            set 
+            {
+                if (Nodes.Count < 1)
+                    Nodes.Add(null);
+                Nodes[0] = value; 
+            }
         }
 
         public override object Execute(SymbolTable table)
         {
             base.Execute(table);
-            statementList.Execute(table);
+            StatementList.Execute(table);
 
             return null;
         }
