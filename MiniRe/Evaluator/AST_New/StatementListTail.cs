@@ -38,6 +38,15 @@ namespace Evaluator.AST_New
             get
             {
                 int count = 0;
+                if (Nodes.Count == 0)
+                    return false;
+                if (Nodes[0] is StringNode)
+                {
+                    StringNode sn = (StringNode)Nodes[0];
+                    if (sn.Token == "%")
+                        return true;
+                }
+
                 foreach (Node n in Nodes)
                 {
                     if (!(n is StringNode))

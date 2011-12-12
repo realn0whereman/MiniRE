@@ -7,7 +7,7 @@ namespace Evaluator.AST_New
 {
     public class Filename : Node
     {
-        string path;
+        string path = "";
 
         public string Path
         {
@@ -19,7 +19,7 @@ namespace Evaluator.AST_New
         {
             get
             {
-                return Nodes.Count == 1;
+                return this.path != "";
             }
         }
     }

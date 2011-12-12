@@ -133,7 +133,7 @@ namespace Evaluator.AST_New
                 if (this.Mode == OtherStatementMode.Print)
                     return Nodes.Count == 1;
                 if(this.Mode == OtherStatementMode.RecursiveReplace || this.Mode == OtherStatementMode.Replace)
-                    return Nodes.Count == 3;
+                    return Nodes.Count == 2;
 
                 throw new Exception("SHOULD NEVER, EVER HAPPEN.");
 

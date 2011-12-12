@@ -43,6 +43,18 @@ namespace Evaluator.AST_New
             get { return id; }
             set { id = value; }
         }
-        
+
+        public override bool IsFull
+        {
+            get
+            {
+                if (Nodes.Count == 0)
+                    return false;
+                if (Nodes[0] is OtherStatement)
+                    return true;
+                else
+                    return Nodes.Count == 2;
+            }
+        }
     }
 }

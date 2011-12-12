@@ -16,7 +16,6 @@ namespace MiniRe
 
         public LL1Parser(string contents)
         {
-            // TODO: Complete member initialization
             this.scanner = new TokenScanner(contents);
             parsetable = new ParserGenerator.ParserGenerator();
         }
@@ -69,6 +68,8 @@ namespace MiniRe
                     Node newElem = GetNodeFromRuleName(topElem);
                     if (!(newrule.Count == 0 && newrule[0] == "%"))
                     {
+                        if (nodes.Count != 0 && nodes.Peek().IsFull)
+                            nodes.Pop();
                         if (nodes.Count != 0)
                             nodes.Peek().Nodes.Add(newElem);
 
@@ -76,8 +77,13 @@ namespace MiniRe
                         {
                             miniRE = nodes.Pop();
                         }
+                        else if (nodes.Count != 0 && nodes.Peek().IsFull)
+                            nodes.Pop();
 
-                        nodes.Push(newElem);
+                        if (!newElem.IsFull && newrule[0] != "%")
+                        {
+                            nodes.Push(newElem);
+                        }
                         newrule.Reverse();
 
                         if (newrule.Count > 0 && newrule[0] != "%")
@@ -155,6 +161,8 @@ namespace MiniRe
                         Regex re = new Regex();
                         re.Pattern = nextToken.Substring(1, nextToken.Length - 2);
                         nodes.Peek().Nodes.Add(re);
+                        if (nodes.Peek().IsFull)
+                            nodes.Pop();
                     }
                     else if (topElem == "ASCII-STR" && nextToken[0] == '"' && nextToken[nextToken.Length - 1] == '"')
                     {
@@ -169,12 +177,16 @@ namespace MiniRe
                             Filename fn = (Filename)top;
                             fn.Path = nextToken.Substring(1, nextToken.Length-2);
                         }
+                        if (top.IsFull)
+                            nodes.Pop();
                     }
                     else if (topElem == "ID")
                     {
                         StringNode sn = new StringNode();
                         sn.Token = nextToken;
                         nodes.Peek().Nodes.Add(sn);
+                        if (nodes.Peek().IsFull)
+                            nodes.Pop();
                     }
                     else
                     {
