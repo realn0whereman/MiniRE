@@ -84,6 +84,7 @@ namespace MiniRe
                         {
                             nodes.Push(newElem);
                         }
+                        newrule = new List<string>(newrule);
                         newrule.Reverse();
 
                         if (newrule.Count > 0 && newrule[0] != "%")

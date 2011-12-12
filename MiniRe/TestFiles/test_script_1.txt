@@ -1,3 +1,4 @@
 begin
-replace 'a' with "b" in "abc.txt" >! "abc_out.txt";
+abd = find 'a' in "abc.txt";
+abd = find 'b' in "abc.txt";
 end
