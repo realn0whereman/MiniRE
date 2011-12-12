@@ -1,0 +1,11 @@
+begin
+match_the = find '[A-Za-z]*the[A-Z a-z]*' in "input.txt";
+match_th = find 'th[A-Z a-z]*' in "input.txt";
+count = #match_the;
+print(count);
+count = #match_th;
+print(count, match_th);
+print(find '[A-Za-z]*z[A-Z a-z]*' in "input.txt" union find '[A-Za-z]*a[A-Z a-z]*' in "input.txt");
+replace 'we|We|they|They' with "I" in "input.txt" >! "result1.txt";
+replace '[A-z a-z]*h[A-z a-z]*' with "anana" in "input.txt" >! "result2.txt";
+end

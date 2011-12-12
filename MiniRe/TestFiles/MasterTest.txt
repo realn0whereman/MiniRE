@@ -1,0 +1,10 @@
+begin
+lols = find 'l(o)*l' in "lols.txt";
+rofls = find 'r(o)*(f)*l' in "rofls.txt";
+print(lols);
+print(rofls);
+num_lols = #lols;
+print(num_lols);
+fav_lol = maxfreqstring(lols);
+print(fav_lol);
+end

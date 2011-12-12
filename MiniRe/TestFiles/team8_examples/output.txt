@@ -1,0 +1,4 @@
+10
+13
+["things"<'input.txt', 1, 17, 23>, "thing"<'input.txt', 2, 15, 20>, "these"<'input.txt', 5, 18, 23>, "them"<'input.txt', 6, 15, 19>, "think"<'input.txt', 6, 97, 102>, "they"<'input.txt', 3, 6, 10><'input.txt', 6, 103, 107><'input.txt', 2, 58, 62><'input.txt', 1, 68, 72>, "the"<'input.txt', 1, 68, 71><'input.txt', 2, 6, 9><'input.txt', 0, 10, 13><'input.txt', 6, 15, 18>]
+["gaze"<'input.txt', 4, 129, 133>, "crazy"<'input.txt', 0, 14, 19><'input.txt', 6, 27, 32>, "square"<'input.txt', 0, 92, 98>, "quote"<'input.txt', 1, 117, 122>]

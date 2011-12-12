@@ -1,0 +1,11 @@
+begin
+combos = (find '([a-z])*combo' in "sample1.txt");
+num_combos = #combos;
+print(num_combos);
+replace '([a-z])*combo' with "kill" in "sample1.txt" >! "WhatHappensInLeagueOfLegends.txt";   
+ko = (find '[a-z]+' in "WhatHappensInLeagueOfLegends.txt");
+print (ko);
+replace 'killa([a-z])*' with "wombo " in "sample1.txt" >! "WhatHappensInSuperSmash.txt";
+smash =  (find '([a-z])+' in "WhatHappensInSuperSmash.txt");
+print (smash);
+end

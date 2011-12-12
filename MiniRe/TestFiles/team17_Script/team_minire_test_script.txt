@@ -1,0 +1,10 @@
+begin
+a = find '[A-Za-z]*iti[A-Za-z]*' in "mangrep.txt" union find '[A-Z][a-z]*k.';
+na = #a;
+print (na);
+replace 'union' with "inters" in "tram_minire_test_script.txt" >! "team_minire_test_script_2.txt";
+b = find '[A-Za-z]*re[A-Za-z]*' in "team_minire_test_script_2.txt";
+nb = #a;
+print (nb);
+end
+

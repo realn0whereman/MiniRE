@@ -1,0 +1,9 @@
+begin
+en_matches = find '([A-Za-z])*en([A-Za-z])*' in "input1.txt";
+en_num = #en_matches;
+print (en_num);
+replace '([A-Za-z])*en' with "an" in "input1.txt" >! "input2.txt";
+and_matche = find '([A-Za-z])*and([A-Za-z])*' in "input2.txt";
+and_num = #and_matche;
+print (and_num);
+end
