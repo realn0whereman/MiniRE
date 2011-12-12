@@ -78,7 +78,9 @@ namespace Evaluator.AST_New
             {
                 if (Nodes.Count >= 1)
                 {
-                    if (Nodes[0] is Term)
+                    if (Nodes[0] is Exp)
+                        return ((Exp)Nodes[0]).Term;
+                    else if (Nodes[0] is Term)
                         return (Term)Nodes[0];
                     else
                         return null;
