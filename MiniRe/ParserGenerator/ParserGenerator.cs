@@ -254,6 +254,8 @@ namespace ParserGenerator
 
             parseTable["<exp-tail>"].Add(")", new List<String>());
             parseTable["<exp-tail>"][")"].Add("%");
+            parseTable["<exp-tail>"].Add(";", new List<String>());
+            parseTable["<exp-tail>"][";"].Add("%");
 
 
             parseTable["<term>"].Add("find", new List<String>());

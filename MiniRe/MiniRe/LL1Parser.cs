@@ -170,7 +170,7 @@ namespace MiniRe
                         if (top is OtherStatement)
                         {
                             OtherStatement nd = (OtherStatement)top;
-                            nd.ReplaceText = nextToken;
+                            nd.ReplaceText = nextToken.Substring(1, nextToken.Length-2);
                         }
                         else if (top is Filename)
                         {
