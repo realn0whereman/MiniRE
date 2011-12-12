@@ -24,6 +24,8 @@ namespace MiniRe
             SymbolTable st = new SymbolTable();
             astRoot.Execute(st);
 
+            Console.Read();
+
         }
     }
 }

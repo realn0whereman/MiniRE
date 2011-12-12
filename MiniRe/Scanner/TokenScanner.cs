@@ -154,7 +154,7 @@ namespace Scanner
                                     }
                                     if (count > 10)
                                     {
-                                        if (slab.ToString() == "recursivereplace")
+                                        if (slab.ToString() == "recursivereplace" || slab.ToString() == "maxfreqstring")
                                         {
                                             tokens.Enqueue(slab.ToString());
                                             slab.Clear();

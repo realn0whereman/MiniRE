@@ -96,7 +96,10 @@ namespace Evaluator.AST_New
             {
                 if (Nodes.Count >= 1)
                 {
-                    return (StringNode)Nodes[0];
+                    if (Nodes[0] is StringNode)
+                        return (StringNode)Nodes[0];
+                    else
+                        return null;
                 }
                 else
                     return null;

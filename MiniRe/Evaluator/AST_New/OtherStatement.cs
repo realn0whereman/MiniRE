@@ -24,7 +24,8 @@ namespace Evaluator.AST_New
                     {
                         foreach(object obj in objs)
                         {
-                            Console.WriteLine(obj.ToString());
+                            if(!(obj is List<object>))
+                                Console.WriteLine(obj.ToString());
                         }
                     }
                     break;
