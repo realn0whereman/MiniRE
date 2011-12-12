@@ -11,10 +11,7 @@ namespace Evaluator.AST_New
     public class OtherStatement : Node
     {
         OtherStatementMode mode;
-        Regex regex;
         string replaceText;
-        ExpList expList;
-        Filenames filenames;
 
         public override object Execute(SymbolTable table)
         {
@@ -22,7 +19,7 @@ namespace Evaluator.AST_New
             switch (mode)
             {
                 case OtherStatementMode.Print:
-                    List<object> objs = (List<object>)expList.Execute(table);
+                    List<object> objs = (List<object>)ExpList.Execute(table);
                     if(objs != null)
                     {
                         foreach(object obj in objs)
@@ -48,7 +45,7 @@ namespace Evaluator.AST_New
         private void RR()
         {
             StringBuilder filetext = new StringBuilder();
-            using (FileStream fs = new FileStream(filenames.Filename.Path, FileMode.Open))
+            using (FileStream fs = new FileStream(Filenames.Filename.Path, FileMode.Open))
             {
                 using (StreamReader sr = new StreamReader(fs))
                 {
@@ -61,12 +58,12 @@ namespace Evaluator.AST_New
 
             while (matches.Length > 0)
             {
-                output = RegexEvaluator.Replace(regex.Pattern, output, replaceText);
+                output = RegexEvaluator.Replace(Regex.Pattern, output, replaceText);
                 matches = RegexEvaluator.Eval(Regex.Pattern, output);
             }
            
 
-            using (FileStream fs = new FileStream(filenames.Destimation.Path, FileMode.Create))
+            using (FileStream fs = new FileStream(Filenames.Destimation.Path, FileMode.Create))
             {
                 using (StreamWriter sw = new StreamWriter(fs))
                 {
@@ -74,11 +71,10 @@ namespace Evaluator.AST_New
                 }
             }
         }
-
         private void Replace()
         {
             StringBuilder filetext = new StringBuilder();
-            using (FileStream fs = new FileStream(filenames.Filename.Path, FileMode.Open))
+            using (FileStream fs = new FileStream(Filenames.Filename.Path, FileMode.Open))
             {
                 using (StreamReader sr = new StreamReader(fs))
                 {
@@ -86,9 +82,9 @@ namespace Evaluator.AST_New
                 }
             }
 
-            String output = RegexEvaluator.Replace(regex.Pattern, filetext.ToString(), replaceText);
+            String output = RegexEvaluator.Replace(Regex.Pattern, filetext.ToString(), replaceText);
 
-            using (FileStream fs = new FileStream(filenames.Destimation.Path, FileMode.Create))
+            using (FileStream fs = new FileStream(Filenames.Destimation.Path, FileMode.Create))
             {
                 using (StreamWriter sw = new StreamWriter(fs))
                 {
@@ -99,8 +95,21 @@ namespace Evaluator.AST_New
 
         public Regex Regex
         {
-            get { return regex; }
-            set { regex = value; }
+            get
+            {
+                if (Nodes.Count >= 1)
+                {
+                    return (Regex)Nodes[0];
+                }
+                else
+                    return null;
+            }
+            set
+            {
+                if (Nodes.Count < 1)
+                    Nodes.Add(null);
+                Nodes[0] = value;
+            }
         }
         public string ReplaceText
         {
@@ -109,8 +118,21 @@ namespace Evaluator.AST_New
         }
         public ExpList ExpList
         {
-            get { return expList; }
-            set { expList = value; }
+            get
+            {
+                if (Nodes.Count >= 1)
+                {
+                    return (ExpList)Nodes[0];
+                }
+                else
+                    return null;
+            }
+            set
+            {
+                if (Nodes.Count < 1)
+                    Nodes.Add(null);
+                Nodes[0] = value;
+            }
         }
         public OtherStatementMode Mode
         {
@@ -119,8 +141,21 @@ namespace Evaluator.AST_New
         }
         public Filenames Filenames
         {
-            get { return filenames; }
-            set { filenames = value; }
+            get
+            {
+                if (Nodes.Count >= 2)
+                {
+                    return (Filenames)Nodes[1];
+                }
+                else
+                    return null;
+            }
+            set
+            {
+                if (Nodes.Count < 2)
+                    Nodes.Add(null);
+                Nodes[1] = value;
+            }
         }
 
         public override bool IsFull

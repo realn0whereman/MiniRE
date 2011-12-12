@@ -121,7 +121,7 @@ namespace EvaluatorTests
             s2.AssignmentStatement = as2;
 
             Exp exp2 = new Exp();
-            exp2.Id = "x";
+            exp2.Id = new StringNode("x");
             as2.Exp = exp2; 
 
 
@@ -185,7 +185,7 @@ namespace EvaluatorTests
             s2.AssignmentStatement = as2;
 
             Exp exp2 = new Exp();
-            exp2.Id = "x";
+            exp2.Id = new StringNode("x");
             as2.Exp = exp2;
 
 
@@ -205,7 +205,7 @@ namespace EvaluatorTests
             print.ExpList = expList;
 
             Exp exp3 = new Exp();
-            exp3.Id = "y";
+            exp3.Id = new StringNode("y");
             expList.Exp = exp3;
 
 
@@ -278,7 +278,7 @@ namespace EvaluatorTests
             s2.AssignmentStatement = as2;
 
             Exp exp2 = new Exp();
-            exp2.Id = "x";
+            exp2.Id = new StringNode("x");
             as2.Exp = exp2;
 
 

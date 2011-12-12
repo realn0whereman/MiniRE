@@ -8,63 +8,59 @@ namespace Evaluator.AST_New
 {
     public class Exp : Node
     {
-        string id;
-        Term term;
-        ExpTail tail;
-
         public override object Execute(SymbolTable table)
         {
             base.Execute(table);
 
-            if (term != null) //<exp> -> <term><exp-tail>
+            if (Term != null) //<exp> -> <term><exp-tail>
             {
-                if (tail != null && tail.Binop != null )
+                if (Tail != null && Tail.Binop != null)
                 {
                     return ExecuteBinop(table);
                 }
 
-                object termResult = term.Execute(table);
+                object termResult = Term.Execute(table);
                 return termResult;
             }
             else //<exp> -> ID
             {
-                return table[id];
+                return table[Id.Token];
             }
         }
 
         private object ExecuteBinop(SymbolTable table)
         {
-            String op = tail.Binop.Operation.Token;
+            String op = Tail.Binop.Operation.Token;
 
             switch (op)
             {
                 case "diff":
                     {
-                        StringMatchList term1 = (StringMatchList)term.Execute(table);
-                        term1.SetFilename(term.Filename.Path);
+                        StringMatchList term1 = (StringMatchList)Term.Execute(table);
+                        term1.SetFilename(Term.Filename.Path);
 
-                        StringMatchList term2 = (StringMatchList)tail.Term.Execute(table);
-                        term2.SetFilename(tail.Term.Filename.Path);
+                        StringMatchList term2 = (StringMatchList)Tail.Term.Execute(table);
+                        term2.SetFilename(Tail.Term.Filename.Path);
 
                         return term1.Difference(term2);
                     }
                 case "union":
                     {
-                        StringMatchList term1 = (StringMatchList)term.Execute(table);
-                        term1.SetFilename(term.Filename.Path);
+                        StringMatchList term1 = (StringMatchList)Term.Execute(table);
+                        term1.SetFilename(Term.Filename.Path);
 
-                        StringMatchList term2 = (StringMatchList)tail.Term.Execute(table);
-                        term2.SetFilename(tail.Term.Filename.Path);
+                        StringMatchList term2 = (StringMatchList)Tail.Term.Execute(table);
+                        term2.SetFilename(Tail.Term.Filename.Path);
 
                         return term1.Union(term2);
                     }
                 case "inters":
                     {
-                        StringMatchList term1 = (StringMatchList)term.Execute(table);
-                        term1.SetFilename(term.Filename.Path);
+                        StringMatchList term1 = (StringMatchList)Term.Execute(table);
+                        term1.SetFilename(Term.Filename.Path);
 
-                        StringMatchList term2 = (StringMatchList)tail.Term.Execute(table);
-                        term2.SetFilename(tail.Term.Filename.Path);
+                        StringMatchList term2 = (StringMatchList)Tail.Term.Execute(table);
+                        term2.SetFilename(Tail.Term.Filename.Path);
 
                         return term1.Intersect(term2);
                     }
@@ -75,18 +71,60 @@ namespace Evaluator.AST_New
 
         public Term Term
         {
-            get { return term; }
-            set { term = value; }
+            get
+            {
+                if (Nodes.Count >= 1)
+                {
+                    if (Nodes[0] is Term)
+                        return (Term)Nodes[0];
+                    else
+                        return null;
+                }
+                else
+                    return null;
+            }
+            set
+            {
+                if (Nodes.Count < 1)
+                    Nodes.Add(null);
+                Nodes[0] = value;
+            }
         }
-        public string Id
+        public StringNode Id
         {
-            get { return id; }
-            set { id = value; }
+            get
+            {
+                if (Nodes.Count >= 1)
+                {
+                    return (StringNode)Nodes[0];
+                }
+                else
+                    return null;
+            }
+            set
+            {
+                if (Nodes.Count < 1)
+                    Nodes.Add(null);
+                Nodes[0] = value;
+            }
         }
         public ExpTail Tail
         {
-            get { return tail; }
-            set { tail = value; }
+            get
+            {
+                if (Nodes.Count >= 2)
+                {
+                    return (ExpTail)Nodes[1];
+                }
+                else
+                    return null;
+            }
+            set
+            {
+                if (Nodes.Count < 2)
+                    Nodes.Add(null);
+                Nodes[1] = value;
+            }
         }
 
         public override bool IsFull

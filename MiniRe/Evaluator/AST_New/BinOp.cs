@@ -7,12 +7,23 @@ namespace Evaluator.AST_New
 {
     public class BinOp : Node
     {
-        StringNode operation;
-
         public StringNode Operation
         {
-            get { return operation; }
-            set { operation = value; }
+            get
+            {
+                if (Nodes.Count >= 1)
+                {
+                    return (StringNode)Nodes[0];
+                }
+                else
+                    return null;
+            }
+            set
+            {
+                if (Nodes.Count < 1)
+                    Nodes.Add(null);
+                Nodes[0] = value;
+            }
         }
 
         public override bool IsFull

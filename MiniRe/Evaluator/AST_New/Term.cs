@@ -10,13 +10,10 @@ namespace Evaluator.AST_New
 {
     public class Term : Node
     {
-        Regex regex;
-        Filename filename;
-
         public override object Execute(SymbolTable table)
         {
             StringBuilder filetext = new StringBuilder();
-            using (FileStream fs = new FileStream(filename.Path, FileMode.Open))
+            using (FileStream fs = new FileStream(Filename.Path, FileMode.Open))
             {
                 using (StreamReader sr = new StreamReader(fs))
                 {
@@ -24,22 +21,54 @@ namespace Evaluator.AST_New
                 }
             }
 
-            StringMatchList matches = RegexEvaluator.Eval(regex.Pattern, filetext.ToString());
-            matches.SetFilename(filename.Path);
+            StringMatchList matches = RegexEvaluator.Eval(Regex.Pattern, filetext.ToString());
+            matches.SetFilename(Filename.Path);
             return matches;
 
         }
 
         public Filename Filename
         {
-            get { return filename; }
-            set { filename = value; }
+            get
+            {
+                if (Nodes.Count >= 2)
+                {
+                    if (Nodes[1] is Filename)
+                        return (Filename)Nodes[1];
+                    else
+                        return null;
+                }
+                else
+                    return null;
+            }
+            set
+            {
+                if (Nodes.Count < 2)
+                    Nodes.Add(null);
+                Nodes[1] = value;
+            }
         }
 
         public Regex Regex
         {
-            get { return regex; }
-            set { regex = value; }
+            get
+            {
+                if (Nodes.Count >= 1)
+                {
+                    if (Nodes[0] is Regex)
+                        return (Regex)Nodes[0];
+                    else
+                        return null;
+                }
+                else
+                    return null;
+            }
+            set
+            {
+                if (Nodes.Count < 1)
+                    Nodes.Add(null);
+                Nodes[0] = value;
+            }
         }
 
         public override bool IsFull
