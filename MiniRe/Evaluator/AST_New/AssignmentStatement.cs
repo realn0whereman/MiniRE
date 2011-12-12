@@ -102,26 +102,7 @@ namespace Evaluator.AST_New
         {
             get
             {
-                if (this.Nodes.Count == 0)
-                    return false;
-                else
-                {
-                    foreach (Node n in Nodes)
-                    {
-                        if (n is Exp)
-                            return true;
-                        else if (n is StringNode)
-                        {
-                            StringNode x = (StringNode)n;
-                            if (x.Token == "maxfreqstring")
-                                if(Nodes.Count == 2)
-                                    return true;
-                                else
-                                    return false;
-                        }
-                    }
-                }
-                return false;
+                return Nodes.Count == 1;
             }
         }
     }
