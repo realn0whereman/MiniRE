@@ -1,10 +1,27 @@
 begin
-lols = find 'l(o)*l' in "lols.txt";
-rofls = find 'r(o)*(f)*l' in "rofls.txt";
+
+lols = find 'l(o)+l' in "lols.txt";
+rofls = find 'r(o)+(f)+l' in "rofls.txt";
 print(lols);
 print(rofls);
+
 num_lols = #lols;
 print(num_lols);
+
 fav_lol = maxfreqstring(lols);
 print(fav_lol);
+
+replace 'l(o)+l' with "l0lzorz" in "lols.txt" >! "lolzors.txt";
+
+recursivereplace 'l(o|0)*l' with "" in "lolzors.txt" >! "nofun.txt";
+
+replace '(zor(z)*)+' with "lol" in "nofun.txt" >! "nicelols.txt";
+
+nicelols = find 'lol' in "nicelols.txt";
+print(nicelols);
+
+commonlols = (find 'l(o)+l' in "lols.txt") union find 'lol' in "nicelols.txt";
+print(commonlols);
+
+
 end

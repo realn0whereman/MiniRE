@@ -26,6 +26,7 @@ namespace Evaluator.AST_New
                         {
                             if(!(obj is List<object>))
                                 Console.WriteLine(obj.ToString());
+                            
                         }
                     }
                     break;

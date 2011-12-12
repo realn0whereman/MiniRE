@@ -24,6 +24,9 @@ namespace Evaluator.AST_New
             }
             else //<exp> -> ID
             {
+                //if (Id == null)
+                //    return null;
+
                 return table[Id.Token];
             }
         }

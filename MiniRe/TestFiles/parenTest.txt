@@ -1,0 +1,4 @@
+begin
+commonlols = (find 'l(o)+l' in "lols.txt" union find 'l(o)*l' in "lols.txt");
+print(commonlols);
+end

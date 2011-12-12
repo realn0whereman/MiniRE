@@ -395,7 +395,7 @@ namespace GraphLibrary
                 bool foundNext = false;
                 foreach (Edge edge in current.Connections)
                 {
-                    if (edge.Condition == c.ToString())
+                    if (edge.Condition == c.ToString() && edge.Connection.Name != "Empty")
                     {
                         foundNext = true;
                         current = edge.Connection;
