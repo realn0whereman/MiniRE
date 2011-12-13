@@ -50,7 +50,7 @@ namespace Evaluator.AST_New
             using (FileStream fs = new FileStream(Filenames.Filename.Path, FileMode.Open))
             {
                 using (StreamReader sr = new StreamReader(fs))
-                {
+               {
                     filetext.Append(sr.ReadToEnd());
                 }
             }
