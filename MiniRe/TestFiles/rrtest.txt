@@ -1,0 +1,3 @@
+begin
+recursivereplace 'l(o)+l' with "o" in "lols.txt" >! "lols_output.txt";
+end
