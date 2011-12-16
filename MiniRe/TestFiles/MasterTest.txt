@@ -20,7 +20,7 @@ replace '(zor(z)*)+' with "lol" in "nofun.txt" >! "nicelols.txt";
 nicelols = find 'lol' in "nicelols.txt";
 print(nicelols);
 
-commonlols = (find 'l(o)+l' in "lols.txt") union find 'lol' in "nicelols.txt";
+commonlols = (find 'l(o)+l' in "lols.txt" union find 'lol' in "nicelols.txt");
 print(commonlols);
 
 

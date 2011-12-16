@@ -1,4 +1,5 @@
 begin
-abd = find 'a' in "abc.txt";
-abd = find 'b' in "abc.txt";
+replace 'ab' with "b" in "abc.txt" >! "abc_final.txt";
+x = find 'lol' in "lols.txt";
+print(x);
 end
