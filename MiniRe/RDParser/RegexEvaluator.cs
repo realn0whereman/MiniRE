@@ -47,10 +47,11 @@ namespace RDParser
 
             foreach (StringMatch match in tokensFound)
             {
-                input = input.Replace(match.Text, replaceText);
+                input = input.Replace(match.Text, replaceText);//(input, replaceText, match.Text);
             }
 
             return input;
         }
+      
     }
 }

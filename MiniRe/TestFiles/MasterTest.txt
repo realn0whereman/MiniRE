@@ -1,6 +1,7 @@
-begin
+begin 
 
 lols = find 'l(o)+l' in "lols.txt";
+recursivereplace 'l(o)+l' with "o" in "lols.txt" >! "lols_output.txt";
 rofls = find 'r(o)+(f)+l' in "rofls.txt";
 print(lols);
 print(rofls);
@@ -20,7 +21,7 @@ replace '(zor(z)*)+' with "lol" in "nofun.txt" >! "nicelols.txt";
 nicelols = find 'lol' in "nicelols.txt";
 print(nicelols);
 
-commonlols = (find 'l(o)+l' in "lols.txt" union find 'lol' in "nicelols.txt");
+commonlols = (find 'l(o)+l' in "lols.txt" diff find 'l(o)*l' in "lols.txt" union find 'l(o)+l' in "lols.txt" union find 'l(o)*l' in "lols.txt");
 print(commonlols);
 
 

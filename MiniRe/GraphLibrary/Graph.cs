@@ -386,6 +386,7 @@ namespace GraphLibrary
         {
             List<StringMatch> tokens = new List<StringMatch>();
             BaseVertex current = start;
+            
             String currentToken = "";
             int line = 1;
 
